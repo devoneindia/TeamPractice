@@ -1,6 +1,7 @@
 ﻿namespace HandlingDb.Contexts
 {
-    public class TeamDbContext
+    public class TeamDbContext : DbContext
     {
+
     }
 }
