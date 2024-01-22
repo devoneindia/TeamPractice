@@ -5,7 +5,9 @@ namespace HandlingDb.Contexts
 {
     public class TeamDbContext : DbContext
     {
-        public DbSet<CricketerDetails> CricketerDeatils { get; set; }
+       
+        public DbSet<Customer> CustomerRecords { get; set; }
+       
         public TeamDbContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
