@@ -6,6 +6,7 @@ namespace HandlingDb.Contexts
     public class TeamDbContext : DbContext
     {
         public DbSet<StudentRegister> data { get; set; }
+        public DbSet<CricketerDetails> CricketerDeatils { get; set; }
         public TeamDbContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -17,7 +18,6 @@ namespace HandlingDb.Contexts
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile("appsettings.local.json", optional: true)
                 .Build();
-
             string dbConnString = configurationInstance["ConnectionStrings:DbStudent"] ?? "";
             optionsBuilder.UseNpgsql(dbConnString);
             base.OnConfiguring(optionsBuilder);
