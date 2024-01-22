@@ -5,6 +5,9 @@ namespace HandlingDb.Contexts
 {
     public class TeamDbContext : DbContext
     {
+       
+        public DbSet<Customer> CustomerRecords { get; set; }
+       
         public DbSet<StudentRegister> data { get; set; }
         public DbSet<CricketerDetails> CricketerDeatils { get; set; }
         public TeamDbContext()
