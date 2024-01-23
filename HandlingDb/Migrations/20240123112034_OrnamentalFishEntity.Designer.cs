@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240123134659_InitialCreate1")]
-    partial class InitialCreate1
+    [Migration("20240123112034_OrnamentalFishEntity")]
+    partial class OrnamentalFishEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,65 @@ namespace HandlingDb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("HandlingDb.Models.Car", b =>
+                {
+                    b.Property<int>("CarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("car_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CarId"));
+
+                    b.Property<string>("CarColor")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("car_color");
+
+                    b.Property<string>("CarMake")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("car_make");
+
+                    b.Property<string>("CarModel")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("car_model");
+
+                    b.Property<string>("CarYear")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("car_year");
+
+                    b.Property<string>("InsurancePolicyNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("insurance_policy_number");
+
+                    b.Property<string>("InsuranceProvider")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("insurance_provider");
+
+                    b.Property<string>("OwnerName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("owner_name");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("registration_number");
+
+                    b.Property<string>("VinNumber")
+                        .HasMaxLength(17)
+                        .HasColumnType("character varying(17)")
+                        .HasColumnName("vin_number");
+
+                    b.HasKey("CarId");
+
+                    b.ToTable("car");
+                });
 
             modelBuilder.Entity("HandlingDb.Models.CricketerDetails", b =>
                 {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("car_details")]
+    [Table("car")]
     public class Car
     {
         [Column("car_id")]
