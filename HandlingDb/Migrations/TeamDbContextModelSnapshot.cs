@@ -22,6 +22,63 @@ namespace HandlingDb.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("HandlingDb.Models.CricketerDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address2")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address3")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address4")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Age")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MobileNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CricketerDeatils");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -98,6 +155,54 @@ namespace HandlingDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer_Record");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("address");
+
+                    b.Property<string>("BloodGroup")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("blood_group");
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("class");
+
+                    b.Property<DateOnly>("Dob")
+                        .HasColumnType("date")
+                        .HasColumnName("dob");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("father_name");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("section");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("student_register");
                 });
 #pragma warning restore 612, 618
         }
