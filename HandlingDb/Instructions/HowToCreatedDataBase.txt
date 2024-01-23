@@ -2,17 +2,13 @@
 
 Run the following in PSQL Tool (postgres)
 
-	CREATE USER localteamuserpraveen01 WITH password 'LSUser01'; 
-	akila//CREATE USER localteamuser01 WITH password 'LUser01';
+	CREATE USER newuser WITH password 'assem123'; 
 
-	CREATE DATABASE localteampracticedb;
-	//akila//CREATE DATABASE localteampracticedp;
+	CREATE DATABASE localteampracticedp;
 
-	GRANT ALL PRIVILEGES ON DATABASE localteampracticedb TO localteamuserpraveen01;
-	akila//GRANT ALL PRIVILEGES ON DATABASE localteampracticedp TO localteamuser01;
+	GRANT ALL PRIVILEGES ON DATABASE localteampracticedp TO newuser;
 
 	\c localteampracticedb
-	GRANT ALL on SCHEMA public to localteamuserpraveen01;
-akila//	\c localteampracticedp
-	GRANT ALL on SCHEMA public to localteamuser01;
+
+	GRANT ALL on SCHEMA public to newuser;
 
