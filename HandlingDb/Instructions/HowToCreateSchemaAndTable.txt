@@ -12,5 +12,5 @@ dotnet ef database update --context TeamDbContext
 //HOW TO ADD a New column
 //To add newcolumn using Migration
 
-dotnet ef migrations added Address2 --context TeamDbContext
+dotnet ef migrations added OrnamentalFishEntity --context TeamDbContext
 dotnet ef database update --context TeamDbContext
