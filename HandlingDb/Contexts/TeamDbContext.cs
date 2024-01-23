@@ -23,7 +23,7 @@ namespace HandlingDb.Contexts
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile("appsettings.local.json", optional: true)
                 .Build();
-            string dbConnString = configurationInstance["ConnectionStrings:Db"] ?? "";
+            string dbConnString = configurationInstance["ConnectionStrings:DbTeam"] ?? "";
             optionsBuilder.UseNpgsql(dbConnString);
             base.OnConfiguring(optionsBuilder);
         }
