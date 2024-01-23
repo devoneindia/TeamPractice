@@ -6,7 +6,7 @@ namespace HandlingDb.Models
     [Table("bike")]
     public class Bike
     {
-        [Column]
+        [Column("id")]
         [Key]
         public int Id { get; set; }
         [Column("brand")]
@@ -24,9 +24,8 @@ namespace HandlingDb.Models
         [Column("engine_number")]
         public string EngineNumber { get; set; } = string.Empty;
         [Column("wheel_size")]
-        public int WheelSize { get; set; } 
+        public int WheelSize { get; set; }
         [Column("seat_capacity")]
         public string SeatCapacity { get; set; } = string.Empty;
-
     }
 }

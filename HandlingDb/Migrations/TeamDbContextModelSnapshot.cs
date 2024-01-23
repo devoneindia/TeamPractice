@@ -22,6 +22,62 @@ namespace HandlingDb.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("HandlingDb.Models.Bike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("brand");
+
+                    b.Property<string>("ChassisNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("chassis_number");
+
+                    b.Property<string>("CubicCylinder")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("cubic_cylinder");
+
+                    b.Property<string>("EngineNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("engine_number");
+
+                    b.Property<DateOnly>("ManufactureDate")
+                        .HasColumnType("date")
+                        .HasColumnName("manufacture_date");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("model");
+
+                    b.Property<DateOnly>("RegistrationDate")
+                        .HasColumnType("date")
+                        .HasColumnName("registration_date");
+
+                    b.Property<string>("SeatCapacity")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("seat_capacity");
+
+                    b.Property<int>("WheelSize")
+                        .HasColumnType("integer")
+                        .HasColumnName("wheel_size");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("bike");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Car", b =>
                 {
                     b.Property<int>("CarId")
