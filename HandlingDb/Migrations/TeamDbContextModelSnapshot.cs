@@ -272,6 +272,125 @@ namespace HandlingDb.Migrations
                     b.ToTable("Customer_Record");
                 });
 
+            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("desktop_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("brand");
+
+                    b.Property<string>("Graphics")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("graphics");
+
+                    b.Property<DateOnly>("ManufactureDate")
+                        .HasColumnType("date")
+                        .HasColumnName("manufacture_date");
+
+                    b.Property<string>("Os")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os");
+
+                    b.Property<string>("OsVersion")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os_version");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer")
+                        .HasColumnName("price");
+
+                    b.Property<string>("Processor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("processor");
+
+                    b.Property<string>("Ram")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ram");
+
+                    b.Property<string>("Rom")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rom");
+
+                    b.Property<string>("Ssd")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ssd");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("desktop");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("mobile_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("brand");
+
+                    b.Property<string>("Graphics")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("graphics");
+
+                    b.Property<DateOnly>("ManufactureDate")
+                        .HasColumnType("date")
+                        .HasColumnName("manufacture_date");
+
+                    b.Property<string>("Os")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os");
+
+                    b.Property<string>("OsVersion")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os_version");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer")
+                        .HasColumnName("price");
+
+                    b.Property<string>("Processor")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("processor");
+
+                    b.Property<string>("Ram")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ram");
+
+                    b.Property<string>("Rom")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("rom");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("mobile");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.OrnamentalFish", b =>
                 {
                     b.Property<int>("Id")
