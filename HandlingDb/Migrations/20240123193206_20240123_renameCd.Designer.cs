@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240123183459_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240123193206_20240123_renameCd")]
+    partial class _20240123_renameCd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,7 +194,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CricketerDeatils");
+                    b.ToTable("cricketer_details");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
@@ -272,7 +272,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer_Record");
+                    b.ToTable("customer_record");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>

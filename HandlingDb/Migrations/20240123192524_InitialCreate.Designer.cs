@@ -3,6 +3,7 @@ using System;
 using HandlingDb.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    partial class TeamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240123192524_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,7 +194,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("cricketer_details");
+                    b.ToTable("CricketerDeatils");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
@@ -269,7 +272,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("customer_record");
+                    b.ToTable("Customer_Record");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>

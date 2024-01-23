@@ -1,5 +1,9 @@
-﻿namespace HandlingDb.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HandlingDb.Models
 {
+    [Table("cricketer_details")]
+
     public class CricketerDetails
     {
         public int Id { get; set; }

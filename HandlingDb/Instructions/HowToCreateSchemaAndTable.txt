@@ -5,15 +5,23 @@ dotnet tool update --global dotnet-ef
 
 dotnet add package Microsoft.EntityFrameworkCore.Design  
 
-dotnet ef migrations add InitialCreate --context TeamDbContext   
+dotnet ef migrations add InitialCreate --context TeamDbContext   //This is inizial migration
 
-dotnet ef database update --context TeamDbContext
+dotnet ef database update --context TeamDbContext // To update the database  excute this command
 
 //HOW TO ADD a New column
 //To add newcolumn using Migration
 
 dotnet ef migrations added Address2 --context EmployeeDbContext
 dotnet ef database update --context EmployeeDbContext
+
+
+//Note: Add a new Model entity along with exsiting project.
+To run the commands are below:
+
+	dotnet ef migrations add AddNewModels --context TeamDbContext  //This is to update  migrations for new model(entity)+ update the tables
+
+	dotnet ef database update --context TeamDbContext
  
 
 
