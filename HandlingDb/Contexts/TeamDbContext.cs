@@ -6,7 +6,8 @@ namespace HandlingDb.Contexts
     public class TeamDbContext : DbContext
     {
         public DbSet<CricketerDetails> UserDeatils { get; set; }
-       
+        public DbSet<AquariumShop>  shops { get; set; }
+        public DbSet<FishFood> fishFoods { get; set; }
         public DbSet<Customer> CustomerRecords { get; set; }
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<OrnamentalFish> fish {  get; set; }
