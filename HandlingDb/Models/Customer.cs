@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("Customer_Record")]
+    [Table("customer_record")]
     public class Customer
     {
-        [Column("Cus_id")]
+        [Column("id")]
         [Key]
         public int Id { get; set; }
         [MaxLength(100)]
-        [Column("Cus_name")]
-        public string Name { get; set; }
+        [Column("name")]
+        public string Name { get; set; } = string.Empty;
         [MaxLength(500)]
         [Column("email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         [MaxLength(500)]
         [Column("phone")]
         public string Phone { get; set; }

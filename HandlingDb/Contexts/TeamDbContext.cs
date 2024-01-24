@@ -5,13 +5,19 @@ namespace HandlingDb.Contexts
 {
     public class TeamDbContext : DbContext
     {
+        public DbSet<CricketerDetails> UserDeatils { get; set; }
        
         public DbSet<Customer> CustomerRecords { get; set; }
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<OrnamentalFish> fish {  get; set; }
+        public DbSet<Desktop> desktopRecords { get; set; }
+        public DbSet<Mobile> mobileRecords { get; set; }
         public DbSet<StudentRegister> data { get; set; }
         public DbSet<Bike> bikes { get; set; }
         public DbSet<CricketerDetails> CricketerDeatils { get; set; }
-        public DbSet<Car> cars { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<SubCategory> subcategories { get; set; }
+        public DbSet<Category> categories { get; set; }
         public TeamDbContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -23,7 +29,7 @@ namespace HandlingDb.Contexts
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile("appsettings.local.json", optional: true)
                 .Build();
-            string dbConnString = configurationInstance["ConnectionStrings:Db"] ?? "";
+            string dbConnString = configurationInstance["ConnectionStrings:DbTeam"] ?? "";
             optionsBuilder.UseNpgsql(dbConnString);
             base.OnConfiguring(optionsBuilder);
         }

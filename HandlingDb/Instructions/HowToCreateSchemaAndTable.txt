@@ -4,8 +4,9 @@ dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 
 dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet ef migrations add InitialCreate --context  TeamDbContext
 
-dotnet ef migrations add InitialCreate --context TeamDbContext
+dotnet ef migrations add InitialCreate1 --context  TeamDbContext
 
 dotnet ef database update --context TeamDbContext
 
@@ -14,3 +15,7 @@ dotnet ef database update --context TeamDbContext
 
 dotnet ef migrations added OrnamentalFishEntity --context TeamDbContext
 dotnet ef database update --context TeamDbContext
+
+dotnet ef migrations add Updated --context  TeamDbContext
+
+

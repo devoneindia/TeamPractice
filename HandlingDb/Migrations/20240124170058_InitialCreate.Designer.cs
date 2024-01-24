@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240122211743_InitialCreateTable")]
-    partial class InitialCreateTable
+    [Migration("20240124170058_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,61 +25,101 @@ namespace HandlingDb.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("category_name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("categories");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.CricketerDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("player_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address");
 
                     b.Property<string>("Address2")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address2");
 
                     b.Property<string>("Address3")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address3");
 
                     b.Property<string>("Address4")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address4");
 
                     b.Property<string>("Age")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("age");
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("city");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<bool>("Gender")
+                        .HasColumnType("boolean")
+                        .HasColumnName("gender");
 
                     b.Property<string>("MobileNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("mobile");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("player_name");
 
                     b.Property<string>("Nation")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("nation");
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)")
+                        .HasColumnName("player_number");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CricketerDeatils");
+                    b.ToTable("cricketer_details");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
@@ -157,7 +197,31 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer_Record");
+                    b.ToTable("customer_record");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("item_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("item");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
@@ -206,6 +270,61 @@ namespace HandlingDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("student_register");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("sub_category_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("sub_categories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Item", b =>
+                {
+                    b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
+                        .WithMany("Items")
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Category", "Category")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+                {
+                    b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

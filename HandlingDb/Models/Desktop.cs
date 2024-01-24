@@ -6,7 +6,7 @@ namespace HandlingDb.Models
     [Table("desktop")]
     public class Desktop
     {
-        [Column("id")]
+        [Column("desktop_id")]
         [Key]
         public int Id { get; set; }
         [Column("brand")]
