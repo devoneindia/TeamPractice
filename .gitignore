@@ -484,3 +484,4 @@ $RECYCLE.BIN/
 *.swp
 /HandlingDb/appsettings.local.json
 /HandlingDb/appsettings.local.json
+/NewSchool/NewSchool/appsettings.school.json
