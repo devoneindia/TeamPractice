@@ -7,6 +7,7 @@ namespace HandlingDb.Contexts
     {
        
         public DbSet<Customer> CustomerRecords { get; set; }
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<OrnamentalFish> fish {  get; set; }
         public DbSet<Desktop> desktopRecords { get; set; }
         public DbSet<Mobile> mobileRecords { get; set; }
@@ -25,7 +26,7 @@ namespace HandlingDb.Contexts
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile("appsettings.local.json", optional: true)
                 .Build();
-            string dbConnString = configurationInstance["ConnectionStrings:Db"] ?? "";
+            string dbConnString = configurationInstance["ConnectionStrings:DbTeam"] ?? "";
             optionsBuilder.UseNpgsql(dbConnString);
             base.OnConfiguring(optionsBuilder);
         }

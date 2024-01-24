@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240123132257_TeamDatabaseTables")]
-    partial class TeamDatabaseTables
+    [Migration("20240123202224_20240124_UpdatingForeignKey")]
+    partial class _20240124_UpdatingForeignKey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,7 +202,7 @@ namespace HandlingDb.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("Cus_id");
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -245,7 +245,7 @@ namespace HandlingDb.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
-                        .HasColumnName("Cus_name");
+                        .HasColumnName("name");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -272,126 +272,68 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer_Record");
+                    b.ToTable("customer_record");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
+            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("desktop_id");
+                    b.Property<string>("OrderId")
+                        .HasColumnType("text")
+                        .HasColumnName("order_id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
+                    b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("brand");
+                        .HasColumnName("customer_id");
 
-                    b.Property<string>("Graphics")
+                    b.Property<bool>("IsPaid")
+                        .HasMaxLength(100)
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_paid");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasMaxLength(100)
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("order_date");
+
+                    b.Property<string>("OrderName")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("order_name");
 
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
+                    b.Property<string>("OrderStatus")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("order_status");
 
-                    b.Property<string>("OsVersion")
+                    b.Property<string>("PaymentMethod")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("payment_method");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
+                    b.Property<string>("ShippingAderess")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("processor");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("shipping_Address");
 
-                    b.Property<string>("Ram")
+                    b.Property<decimal>("TotalAmount")
+                        .HasMaxLength(100)
+                        .HasColumnType("numeric")
+                        .HasColumnName("total_amount");
+
+                    b.Property<string>("TrackingNumber")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ram");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("tracking-number");
 
-                    b.Property<string>("Rom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("rom");
+                    b.HasKey("OrderId");
 
-                    b.Property<string>("Ssd")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ssd");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("desktop");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("mobile_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
-
-                    b.Property<string>("Graphics")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
-
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
-
-                    b.Property<string>("OsVersion")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("processor");
-
-                    b.Property<string>("Ram")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ram");
-
-                    b.Property<string>("Rom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("rom");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("mobile");
+                    b.ToTable("order_record");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.OrnamentalFish", b =>

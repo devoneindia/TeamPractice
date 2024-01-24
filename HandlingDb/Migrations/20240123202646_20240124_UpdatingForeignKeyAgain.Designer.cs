@@ -3,6 +3,7 @@ using System;
 using HandlingDb.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    partial class TeamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240123202646_20240124_UpdatingForeignKeyAgain")]
+    partial class _20240124_UpdatingForeignKeyAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -333,125 +336,6 @@ namespace HandlingDb.Migrations
                     b.HasKey("OrderId");
 
                     b.ToTable("order_record");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("desktop_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
-
-                    b.Property<string>("Graphics")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
-
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
-
-                    b.Property<string>("OsVersion")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("processor");
-
-                    b.Property<string>("Ram")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ram");
-
-                    b.Property<string>("Rom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("rom");
-
-                    b.Property<string>("Ssd")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ssd");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("desktop");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("mobile_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
-
-                    b.Property<string>("Graphics")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
-
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
-
-                    b.Property<string>("OsVersion")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("processor");
-
-                    b.Property<string>("Ram")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ram");
-
-                    b.Property<string>("Rom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("rom");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("mobile");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.OrnamentalFish", b =>
