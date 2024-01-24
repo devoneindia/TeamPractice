@@ -23,10 +23,12 @@ namespace HandlingDb.Models
         public string Food { get; set; } = string.Empty;
         [Column("price_per_piece")]
         public string PricePerPiece { get; set; } = string.Empty;
+        public AquariumShop? AquariumShop { get; set;}
         [Column("price_per_pair")]
         public string PricePerPair { get; set; } = string.Empty;
         [Column("packing_fee")]
         public string PackingFee { get; set; } = string.Empty;
+
 
     }
 }
