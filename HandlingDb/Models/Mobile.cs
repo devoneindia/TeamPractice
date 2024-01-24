@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("desktop")]
-    public class Desktop
+    [Table("mobile")]
+    public class Mobile
     {
-        [Column("desktop_id")]
+        [Column("mobile_id")]
         [Key]
         public int Id { get; set; }
         [Column("brand")]
-        public string Brand { get; set; } = string.Empty;
+        public string Brand { get; set; }  = string.Empty;
         [Column("processor")]
         public string Processor { get; set; } = string.Empty;
         [Column("ram")]
@@ -19,8 +19,6 @@ namespace HandlingDb.Models
         public string Rom { get; set; } = string.Empty;
         [Column("graphics")]
         public string Graphics { get; set; } = string.Empty;
-        [Column("ssd")]
-        public string Ssd { get; set; } = string.Empty;
         [Column("os")]
         public string Os { get; set; } = string.Empty;
         [Column("os_version")]
@@ -30,5 +28,4 @@ namespace HandlingDb.Models
         [Column("manufacture_date")]
         public DateOnly ManufactureDate { get; set; }
     }
-    
 }
