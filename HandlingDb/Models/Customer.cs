@@ -6,11 +6,11 @@ namespace HandlingDb.Models
     [Table("customer_record")]
     public class Customer
     {
-        [Column("Cus_id")]
+        [Column("id")]
         [Key]
         public int Id { get; set; }
         [MaxLength(100)]
-        [Column("Cus_name")]
+        [Column("name")]
         public string Name { get; set; }
         [MaxLength(500)]
         [Column("email")]

@@ -8,8 +8,12 @@ namespace HandlingDb.Contexts
         public DbSet<CricketerDetails> UserDeatils { get; set; }
        
         public DbSet<Customer> CustomerRecords { get; set; }
-       
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
+        public DbSet<OrnamentalFish> fish {  get; set; }
+        public DbSet<Desktop> desktopRecords { get; set; }
+        public DbSet<Mobile> mobileRecords { get; set; }
         public DbSet<StudentRegister> data { get; set; }
+        public DbSet<Bike> bikes { get; set; }
         public DbSet<CricketerDetails> CricketerDeatils { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<SubCategory> subcategories { get; set; }
