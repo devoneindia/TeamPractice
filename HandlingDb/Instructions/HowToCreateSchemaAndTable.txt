@@ -17,3 +17,5 @@ dotnet ef migrations added OrnamentalFishEntity --context TeamDbContext
 dotnet ef database update --context TeamDbContext
 
 dotnet ef migrations add Updated --context  TeamDbContext
+
+
