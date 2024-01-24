@@ -43,5 +43,4 @@ namespace HandlingDb.Models
         [Column("subscriptionstatus")]
         public bool SubscriptionStatus { get; set; }
     }
-
 }

@@ -22,6 +22,102 @@ namespace HandlingDb.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("category_name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("categories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.CricketerDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("player_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address");
+
+                    b.Property<string>("Address2")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address2");
+
+                    b.Property<string>("Address3")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address3");
+
+                    b.Property<string>("Address4")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("address4");
+
+                    b.Property<string>("Age")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)")
+                        .HasColumnName("age");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("city");
+
+                    b.Property<bool>("Gender")
+                        .HasColumnType("boolean")
+                        .HasColumnName("gender");
+
+                    b.Property<string>("MobileNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("mobile");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("player_name");
+
+                    b.Property<string>("Nation")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("nation");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)")
+                        .HasColumnName("player_number");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("cricketer_details");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Bike", b =>
                 {
                     b.Property<int>("Id")
@@ -269,296 +365,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("customer_record");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("order_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderId"));
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("integer")
-                        .HasColumnName("customer_id");
-
-                    b.Property<bool>("IsPaid")
-                        .HasMaxLength(100)
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_paid");
-
-                    b.Property<DateTime>("OrderDate")
-                        .HasMaxLength(100)
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("order_date");
-
-                    b.Property<string>("OrderName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("order_name");
-
-                    b.Property<string>("OrderStatus")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("order_status");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("payment_method");
-
-                    b.Property<string>("ShippingAderess")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("shipping_Address");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasMaxLength(100)
-                        .HasColumnType("numeric")
-                        .HasColumnName("total_amount");
-
-                    b.Property<string>("TrackingNumber")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("tracking-number");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("order_record");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("desktop_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
-
-                    b.Property<string>("Graphics")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
-
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
-
-                    b.Property<string>("OsVersion")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("processor");
-
-                    b.Property<string>("Ram")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ram");
-
-                    b.Property<string>("Rom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("rom");
-
-                    b.Property<string>("Ssd")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ssd");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("desktop");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("mobile_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
-
-                    b.Property<string>("Graphics")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
-
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
-
-                    b.Property<string>("OsVersion")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("processor");
-
-                    b.Property<string>("Ram")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("ram");
-
-                    b.Property<string>("Rom")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("rom");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("mobile");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.OrnamentalFish", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Colour")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("colour");
-
-                    b.Property<string>("Food")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("food");
-
-                    b.Property<string>("LifeSpan")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("life_span");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Origin")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("origin");
-
-                    b.Property<string>("PackingFee")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("packing_fee");
-
-                    b.Property<string>("PricePerPair")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("price_per_pair");
-
-                    b.Property<string>("PricePerPiece")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("price_per_piece");
-
-                    b.Property<string>("Water")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("water");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ornamental_fish");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("address");
-
-                    b.Property<string>("BloodGroup")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("blood_group");
-
-                    b.Property<string>("Class")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("class");
-
-                    b.Property<DateOnly>("Dob")
-                        .HasColumnType("date")
-                        .HasColumnName("dob");
-
-                    b.Property<string>("FatherName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("father_name");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Section")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("section");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("student_register");
+                    b.ToTable("Customer_Record");
                 });
 #pragma warning restore 612, 618
         }
