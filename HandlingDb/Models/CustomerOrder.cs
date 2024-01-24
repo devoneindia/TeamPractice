@@ -6,12 +6,19 @@ namespace HandlingDb.Models
     [Table("order_record")]
     public class CustomerOrder
     {
-        [Column("order_id")]
         [Key]
-        public string OrderId { get; set; }
+        [Column("order_id")]        
+        public int OrderId { get; set; }
+        
         [MaxLength(100)]
         [Column("order_name")]
-        public string CustomerName { get; set; }
+        public string OrderName { get; set; }
+
+        [ForeignKey("customer_record")]
+        [Column("customer_id")]
+        public int CustomerId { get; set; }
+        
+                
         [MaxLength(100)]
         [Column("order_date")]
         public DateTime OrderDate { get; set; }
