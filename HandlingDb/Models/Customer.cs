@@ -11,10 +11,10 @@ namespace HandlingDb.Models
         public int Id { get; set; }
         [MaxLength(100)]
         [Column("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [MaxLength(500)]
         [Column("email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
         [MaxLength(500)]
         [Column("phone")]
         public string Phone { get; set; }

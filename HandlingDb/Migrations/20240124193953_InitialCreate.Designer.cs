@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240123202224_20240124_UpdatingForeignKey")]
-    partial class _20240124_UpdatingForeignKey
+    [Migration("20240124193953_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,13 +277,15 @@ namespace HandlingDb.Migrations
 
             modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
                 {
-                    b.Property<string>("OrderId")
-                        .HasColumnType("text")
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
                         .HasColumnName("order_id");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderId"));
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer")
                         .HasColumnName("customer_id");
 
                     b.Property<bool>("IsPaid")
