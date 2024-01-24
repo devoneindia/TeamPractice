@@ -6,12 +6,13 @@ namespace HandlingDb.Models
     [Table("cricketer_details")]
     public class CricketerDetails
     {
-        [Column("player_id")]
         [Key]
+        [Column("player_id")]
         public int Id { get; set; }
+
         [MaxLength(100)]
         [Column("player_name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [MaxLength(4)]
         [Column("player_number")]
         public string Number { get; set; }

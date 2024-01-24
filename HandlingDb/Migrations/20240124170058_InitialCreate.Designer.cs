@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240123111141_AddNewModels")]
-    partial class AddNewModels
+    [Migration("20240124170058_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,26 @@ namespace HandlingDb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("category_name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("categories");
+                });
 
             modelBuilder.Entity("HandlingDb.Models.CricketerDetails", b =>
                 {
@@ -81,7 +101,6 @@ namespace HandlingDb.Migrations
                         .HasColumnName("mobile");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("player_name");
@@ -178,7 +197,31 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer_Record");
+                    b.ToTable("customer_record");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("item_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("item");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
@@ -227,6 +270,61 @@ namespace HandlingDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("student_register");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("sub_category_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("sub_categories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Item", b =>
+                {
+                    b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
+                        .WithMany("Items")
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Category", "Category")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+                {
+                    b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

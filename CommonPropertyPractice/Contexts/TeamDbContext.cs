@@ -1,19 +1,15 @@
-﻿using HandlingDb.Models;
+﻿using CommonPropertyPractice.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HandlingDb.Contexts
+namespace CommonPropertyPractice.Contexts
 {
     public class TeamDbContext : DbContext
     {
-        public DbSet<CricketerDetails> UserDeatils { get; set; }
-       
-        public DbSet<Customer> CustomerRecords { get; set; }
-       
-        public DbSet<StudentRegister> data { get; set; }
-        public DbSet<CricketerDetails> CricketerDeatils { get; set; }
-        public DbSet<Item> Items { get; set; }
-        public DbSet<SubCategory> subcategories { get; set; }
-        public DbSet<Category> categories { get; set; }
+        public DbSet<Product> ProductDetails { get; set; }
+
+        public DbSet<Category> CategoryDetails { get; set; }
+
+        public DbSet<SubCategory> SubCategoryDetails { get; set; }
         public TeamDbContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);

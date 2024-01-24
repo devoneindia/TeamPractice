@@ -1,0 +1,42 @@
+﻿@page "/products"
+<h3>Products</h3>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4">
+            <button class="btn btn-primary" @onclick="AddProducts">Add Products</button>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @if (Categories == null || Categories.Count() == 0)
+            {
+                <p><em>No Employees Found</em></p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in Categories)
+                        {
+                            <tr>
+                                <td>@employee.Id</td>
+                                <td>@employee.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
