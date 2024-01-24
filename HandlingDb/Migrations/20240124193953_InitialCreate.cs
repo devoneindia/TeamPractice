@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate1 : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,8 +104,10 @@ namespace HandlingDb.Migrations
                 name: "order_record",
                 columns: table => new
                 {
-                    order_id = table.Column<string>(type: "text", nullable: false),
+                    order_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     order_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    customer_id = table.Column<int>(type: "integer", nullable: false),
                     order_date = table.Column<DateTime>(type: "timestamp without time zone", maxLength: 100, nullable: false),
                     total_amount = table.Column<decimal>(type: "numeric", maxLength: 100, nullable: false),
                     shipping_Address = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
@@ -158,35 +160,6 @@ namespace HandlingDb.Migrations
                 {
                     table.PrimaryKey("PK_student_register", x => x.id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "CustomerCustomerOrder",
-                columns: table => new
-                {
-                    CustomersId = table.Column<int>(type: "integer", nullable: false),
-                    OrdersOrderId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CustomerCustomerOrder", x => new { x.CustomersId, x.OrdersOrderId });
-                    table.ForeignKey(
-                        name: "FK_CustomerCustomerOrder_customer_record_CustomersId",
-                        column: x => x.CustomersId,
-                        principalTable: "customer_record",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CustomerCustomerOrder_order_record_OrdersOrderId",
-                        column: x => x.OrdersOrderId,
-                        principalTable: "order_record",
-                        principalColumn: "order_id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CustomerCustomerOrder_OrdersOrderId",
-                table: "CustomerCustomerOrder",
-                column: "OrdersOrderId");
         }
 
         /// <inheritdoc />
@@ -202,19 +175,16 @@ namespace HandlingDb.Migrations
                 name: "CricketerDeatils");
 
             migrationBuilder.DropTable(
-                name: "CustomerCustomerOrder");
+                name: "customer_record");
+
+            migrationBuilder.DropTable(
+                name: "order_record");
 
             migrationBuilder.DropTable(
                 name: "ornamental_fish");
 
             migrationBuilder.DropTable(
                 name: "student_register");
-
-            migrationBuilder.DropTable(
-                name: "customer_record");
-
-            migrationBuilder.DropTable(
-                name: "order_record");
         }
     }
 }
