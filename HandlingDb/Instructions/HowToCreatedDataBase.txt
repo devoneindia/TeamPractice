@@ -6,13 +6,28 @@ Run the following in PSQL Tool (postgres)
 	akila//CREATE USER localteamuser01 WITH password 'LUser01';
 
 	CREATE DATABASE localteampracticedb;
-	//akila//CREATE DATABASE localteampracticedp;
+	//akila//CREATE DATABASE localteampracticedb;
 
-	GRANT ALL PRIVILEGES ON DATABASE localteampracticedb TO localteamuserpraveen01;
-	akila//GRANT ALL PRIVILEGES ON DATABASE localteampracticedp TO localteamuser01;
+	
+	akila//GRANT ALL PRIVILEGES ON DATABASE localteampracticedb TO localteamuser01;
 
 	\c localteampracticedb
 	GRANT ALL on SCHEMA public to localteamuserpraveen01;
-akila//	\c localteampracticedp
+akila//	\c localteampracticedb
 	GRANT ALL on SCHEMA public to localteamuser01;
+
+
+	///to drop database and tables
+	// Drop and Recreate
+\c postgres;
+
+drop database localemployeedb;
+
+drop database localemployeedb WITH (FORCE);
+
+REVOKE ALL on schema public from localsanthozuser01;
+
+drop user localsanthozuser01;
+
+\c postgres;
 
