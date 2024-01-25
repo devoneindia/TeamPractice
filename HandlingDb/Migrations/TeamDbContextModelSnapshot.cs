@@ -107,37 +107,31 @@ namespace HandlingDb.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address");
 
                     b.Property<string>("Address2")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address2");
 
                     b.Property<string>("Address3")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address3");
 
                     b.Property<string>("Address4")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address4");
 
                     b.Property<string>("Age")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("character varying(2)")
                         .HasColumnName("age");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("city");
@@ -147,7 +141,6 @@ namespace HandlingDb.Migrations
                         .HasColumnName("gender");
 
                     b.Property<string>("MobileNumber")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
                         .HasColumnName("mobile");
@@ -158,13 +151,11 @@ namespace HandlingDb.Migrations
                         .HasColumnName("player_name");
 
                     b.Property<string>("Nation")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("nation");
 
                     b.Property<string>("Number")
-                        .IsRequired()
                         .HasMaxLength(4)
                         .HasColumnType("character varying(4)")
                         .HasColumnName("player_number");
@@ -493,7 +484,7 @@ namespace HandlingDb.Migrations
                     b.ToTable("ornamental_fish");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Products", b =>
+            modelBuilder.Entity("HandlingDb.Models.ProductItems", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -514,7 +505,7 @@ namespace HandlingDb.Migrations
 
                     b.HasIndex("SubCategoryId");
 
-                    b.ToTable("item");
+                    b.ToTable("product_items");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
@@ -590,7 +581,7 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Products", b =>
+            modelBuilder.Entity("HandlingDb.Models.ProductItems", b =>
                 {
                     b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
                         .WithMany("Items")
