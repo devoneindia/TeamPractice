@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("item")]
-    public class Item
+    [Table("product_items")]
+    public class ProductItems
     {
         [Key]
         [Column("item_id")]

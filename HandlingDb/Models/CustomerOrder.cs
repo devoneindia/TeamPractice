@@ -6,6 +6,7 @@ namespace HandlingDb.Models
     [Table("order_record")]
     public class CustomerOrder
     {
+        public Customer? Customers { get; set; }
         [Key]
         [Column("order_id")]        
         public int OrderId { get; set; }
@@ -17,8 +18,7 @@ namespace HandlingDb.Models
         [ForeignKey("customer_record")]
         [Column("customer_id")]
         public int CustomerId { get; set; }
-        
-                
+         
         [MaxLength(100)]
         [Column("order_date")]
         public DateTime OrderDate { get; set; }
@@ -41,6 +41,7 @@ namespace HandlingDb.Models
         [MaxLength(100)]
         [Column("tracking-number")]
         public string TrackingNumber { get; set;}
+
 
     }
 }
