@@ -21,6 +21,6 @@ namespace HandlingDb.Models
         [Column("sub_category_name")]
         public string? Name { get; set; }
 
-        public virtual ICollection<Item>? Items { get; set; }
+        public virtual ICollection<Products>? Items { get; set; }
     }
 }
