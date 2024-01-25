@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("customer_record")]
+    [Table("customer_record")] //Parent table
     public class Customer
     {
         [Column("id")]
@@ -47,6 +47,8 @@ namespace HandlingDb.Models
         [Column("subscriptionstatus")]
         public bool SubscriptionStatus { get; set; }
 
-        public virtual ICollection<Customer>? CustomerDetails { get; set; }
+        public virtual Product Products { get; set; }
+
+
     }
 }

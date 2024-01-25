@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("product")]
-    public class Product
+    [Table("product")] //Master table
+    public class Product 
     {
         [Key]
         [Column("id")]
@@ -12,11 +12,12 @@ namespace HandlingDb.Models
 
         [MaxLength(500)]
         [Column("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [MaxLength(500)]
         [Column("price")]
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = decimal.Zero;
 
+       
        
     }
 }
