@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("products")]
-    public class Products
+    [Table("product")]
+    public class Product
     {
         [Key]
         [Column("product_id")]
@@ -13,8 +13,8 @@ namespace HandlingDb.Models
         [Column("product_name")]
         public string? Name { get; set; }
 
-        [Column("sub_category_id")]
-        public int? SubCategoryId { get; set; }
-        public virtual SubCategory? SubCategory { get; set; }
+        public decimal? Price { get; set; }
+
+       
     }
 }

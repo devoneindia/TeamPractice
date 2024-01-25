@@ -15,7 +15,7 @@ namespace HandlingDb.Contexts
         public DbSet<StudentRegister> data { get; set; }
         public DbSet<Bike> bikes { get; set; }
         public DbSet<CricketerDetails> CricketerDeatils { get; set; }
-        public DbSet<Products> ProductsData { get; set; }
+       
         public DbSet<SubCategory> subcategories { get; set; }
         public DbSet<Category> categories { get; set; }
         public TeamDbContext()

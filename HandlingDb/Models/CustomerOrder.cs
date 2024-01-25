@@ -17,7 +17,7 @@ namespace HandlingDb.Models
 
         [ForeignKey("customer_record")]
         [Column("customer_id")]
-        public int CustomerId { get; set; }
+        public int CustomerId { get; set; } = 0;
          
         [MaxLength(100)]
         [Column("order_date")]
@@ -41,7 +41,6 @@ namespace HandlingDb.Models
         [MaxLength(100)]
         [Column("tracking-number")]
         public string TrackingNumber { get; set;}
-
 
     }
 }
