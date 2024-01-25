@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("order_record")]
+    [Table("order_record")] // Child table
     public class CustomerOrder
     {
         [Key]
@@ -44,6 +44,9 @@ namespace HandlingDb.Models
         [MaxLength(100)]
         [Column("tracking-number")]
         public string TrackingNumber { get; set;}
+
+        public virtual Product Products { get; set; }
+        public virtual Customer customer { get; set; }
 
     }
 }

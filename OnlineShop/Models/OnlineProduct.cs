@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HandlingDb.Models
+namespace OnlineShop.Models
 {
-    [Table("product")] //Master table
-    public class Product 
+    [Table("aki_product")] //Master table
+    public class OnlineProduct
     {
         [Key]
         [Column("id")]
@@ -16,8 +16,5 @@ namespace HandlingDb.Models
         [MaxLength(500)]
         [Column("price")]
         public decimal Price { get; set; } = decimal.Zero;
-
-       
-       
     }
 }

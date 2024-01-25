@@ -172,6 +172,7 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
                 name: "prav_categories",
                 columns: table => new
                 {
@@ -185,6 +186,8 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+========
+>>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "product",
                 columns: table => new
                 {
@@ -218,6 +221,29 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
+========
+                name: "sub_categories",
+                columns: table => new
+                {
+                    sub_category_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    category_id = table.Column<int>(type: "integer", nullable: false),
+                    sub_category_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sub_categories", x => x.sub_category_id);
+                    table.ForeignKey(
+                        name: "FK_sub_categories_categories_category_id",
+                        column: x => x.category_id,
+                        principalTable: "categories",
+                        principalColumn: "category_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+>>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "aquarium_shop",
                 columns: table => new
                 {
@@ -327,11 +353,14 @@ namespace HandlingDb.Migrations
                 name: "IX_ornamental_fish_AquariumShopId",
                 table: "ornamental_fish",
                 column: "AquariumShopId");
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_prav_product_details_SubCategoryId",
                 table: "prav_product_details",
                 column: "SubCategoryId");
+========
+>>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_prav_sub_categories_category_id",
@@ -364,15 +393,24 @@ namespace HandlingDb.Migrations
                 name: "ornamental_fish");
 
             migrationBuilder.DropTable(
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
                 name: "prav_product_details");
 
             migrationBuilder.DropTable(
+========
+>>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "product");
 
             migrationBuilder.DropTable(
                 name: "student_register");
 
             migrationBuilder.DropTable(
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
+========
+                name: "sub_categories");
+
+            migrationBuilder.DropTable(
+>>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "aquarium_shop");
 
             migrationBuilder.DropTable(
