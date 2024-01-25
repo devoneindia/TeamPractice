@@ -12,12 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-<<<<<<<< HEAD:HandlingDb/Migrations/20240125104510_InitialCreate.Designer.cs
-    [Migration("20240125104510_InitialCreate")]
-========
-    [Migration("20240125095719_InitialCreate")]
->>>>>>>> 8eb6dd43c6b2d65a47428e787c6a2f1d21c45c8d:HandlingDb/Migrations/20240125080710_InitialCreate.Designer.cs
->>>>>>>> b33ca5d0c72c15cc2c37ac6097dd8cc9228a41af:HandlingDb/Migrations/20240125095719_InitialCreate.Designer.cs
+    [Migration("20240125111530_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -286,6 +281,10 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("pinCode");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -345,6 +344,10 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("payment_method");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
                     b.Property<string>("ShippingAderess")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -363,8 +366,6 @@ namespace HandlingDb.Migrations
                         .HasColumnName("tracking-number");
 
                     b.HasKey("OrderId");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("order_record");
                 });
@@ -581,35 +582,29 @@ namespace HandlingDb.Migrations
                     b.ToTable("ornamental_fish");
                 });
 
-<<<<<<<< HEAD:HandlingDb/Migrations/20240125104510_InitialCreate.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.Product", b =>
-========
-            modelBuilder.Entity("HandlingDb.Models.ProductItems", b =>
->>>>>>>> b33ca5d0c72c15cc2c37ac6097dd8cc9228a41af:HandlingDb/Migrations/20240125095719_InitialCreate.Designer.cs
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("product_id");
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("product_name");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("name");
 
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("numeric");
+                    b.Property<decimal>("Price")
+                        .HasMaxLength(500)
+                        .HasColumnType("numeric")
+                        .HasColumnName("price");
 
                     b.HasKey("Id");
 
-<<<<<<<< HEAD:HandlingDb/Migrations/20240125104510_InitialCreate.Designer.cs
                     b.ToTable("product");
-========
-                    b.HasIndex("SubCategoryId");
-
-                    b.ToTable("product_items");
->>>>>>>> b33ca5d0c72c15cc2c37ac6097dd8cc9228a41af:HandlingDb/Migrations/20240125095719_InitialCreate.Designer.cs
                 });
 
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
@@ -685,11 +680,7 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
-<<<<<<<< HEAD:HandlingDb/Migrations/20240125104510_InitialCreate.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
-========
-            modelBuilder.Entity("HandlingDb.Models.Products", b =>
->>>>>>>> b33ca5d0c72c15cc2c37ac6097dd8cc9228a41af:HandlingDb/Migrations/20240125095719_InitialCreate.Designer.cs
                 {
                     b.HasOne("HandlingDb.Models.FishFood", "FishFood")
                         .WithMany()
@@ -705,17 +696,6 @@ namespace HandlingDb.Migrations
                     b.HasOne("HandlingDb.Models.Customer", null)
                         .WithMany("CustomerDetails")
                         .HasForeignKey("CustomerId");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
-                {
-                    b.HasOne("HandlingDb.Models.Customer", "Customers")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customers");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.FishFood", b =>

@@ -1,0 +1,26 @@
+﻿@page "/approduct"
+
+<h3>Product</h3>
+
+<EditForm Model="ProductModel" OnValidSubmit="@HandleValidSubmit">
+<div class="container">
+  <div class="row">
+    <div>
+                <label for="productName">Product Name:</label>
+                <input id="productName" @bind="ProductModel.Name"/>
+
+                <label for="productName">Product Price:</label>
+                <input id="productName" @bind="ProductModel.Price"/>
+
+    </div>
+        
+        <div class="col-4">
+            <button class="btn btn-primary" @onclick="AddProduct">Add Product</button>
+        </div>
+ </div>
+</div>
+</EditForm>
+
+@code {
+
+}
