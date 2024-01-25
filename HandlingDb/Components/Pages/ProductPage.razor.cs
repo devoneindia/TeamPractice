@@ -10,7 +10,7 @@ namespace HandlingDb.Components.Pages
 
         public List<Product> ProductList { get; set; }
 
-        public ProductPage() { }
+      // public ProductPage() { }
 
         public void HandleValidSubmit()
         {

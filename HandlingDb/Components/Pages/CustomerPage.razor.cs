@@ -7,7 +7,7 @@
         public List<Customer> CustomerList { get; set; }
 
 
-        public CustomerPage() { }
+        //public CustomerPage() { }
 
         public void HandleValidSubmit()
         {
