@@ -7,13 +7,15 @@ namespace HandlingDb.Models
     public class Product
     {
         [Key]
-        [Column("product_id")]
+        [Column("id")]
         public int Id { get; set; }
 
-        [Column("product_name")]
-        public string? Name { get; set; }
-
-        public decimal? Price { get; set; }
+        [MaxLength(500)]
+        [Column("name")]
+        public string Name { get; set; }
+        [MaxLength(500)]
+        [Column("price")]
+        public decimal Price { get; set; }
 
        
     }
