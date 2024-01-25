@@ -1,4 +1,5 @@
-﻿using HandlingDb.Models;
+﻿using HandlingDb.Components.Pages;
+using HandlingDb.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HandlingDb.Contexts
@@ -14,10 +15,13 @@ namespace HandlingDb.Contexts
         public DbSet<Mobile> mobileRecords { get; set; }
         public DbSet<StudentRegister> data { get; set; }
         public DbSet<Bike> bikes { get; set; }
+        public DbSet<CricketerDetails> cricketerData { get; set; }
+        public DbSet<ProductItems> productsData { get; set; }
         public DbSet<CricketerDetails> CricketerDeatils { get; set; }
        
         public DbSet<SubCategory> subcategories { get; set; }
         public DbSet<Category> categories { get; set; }
+        
         public TeamDbContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
