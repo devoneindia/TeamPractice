@@ -12,12 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-<<<<<<<< HEAD:HandlingDb/Migrations/20240124202119_InitialCreate.Designer.cs
-    [Migration("20240124202119_InitialCreate")]
-========
-    [Migration("20240125080710_InitialCreate")]
->>>>>>>> 8eb6dd43c6b2d65a47428e787c6a2f1d21c45c8d:HandlingDb/Migrations/20240125080710_InitialCreate.Designer.cs
-    partial class InitialCreate
+    [Migration("20240124203429_update_foreignkey")]
+    partial class update_foreignkey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,6 +210,9 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("addressLine4");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasMaxLength(500)
                         .HasColumnType("timestamp without time zone")
@@ -255,6 +254,8 @@ namespace HandlingDb.Migrations
                         .HasColumnName("subscriptionstatus");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("customer_record");
                 });
@@ -318,6 +319,8 @@ namespace HandlingDb.Migrations
                         .HasColumnName("tracking-number");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("order_record");
                 });
@@ -524,30 +527,6 @@ namespace HandlingDb.Migrations
                     b.ToTable("ornamental_fish");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Products", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("item_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("item_name");
-
-                    b.Property<int?>("SubCategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubCategoryId");
-
-                    b.ToTable("item");
-                });
-
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
                 {
                     b.Property<int>("Id")
@@ -621,11 +600,25 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
-<<<<<<<< HEAD:HandlingDb/Migrations/20240124202119_InitialCreate.Designer.cs
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", null)
+                        .WithMany("CustomerDetails")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", "Customers")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customers");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Item", b =>
-========
-            modelBuilder.Entity("HandlingDb.Models.Products", b =>
->>>>>>>> 8eb6dd43c6b2d65a47428e787c6a2f1d21c45c8d:HandlingDb/Migrations/20240125080710_InitialCreate.Designer.cs
                 {
                     b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
                         .WithMany("Items")
@@ -648,6 +641,11 @@ namespace HandlingDb.Migrations
             modelBuilder.Entity("HandlingDb.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
+                {
+                    b.Navigation("CustomerDetails");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>

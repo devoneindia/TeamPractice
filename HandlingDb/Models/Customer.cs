@@ -42,5 +42,7 @@ namespace HandlingDb.Models
         [MaxLength(500)]
         [Column("subscriptionstatus")]
         public bool SubscriptionStatus { get; set; }
+
+        public virtual ICollection<Customer>? CustomerDetails { get; set; }
     }
 }

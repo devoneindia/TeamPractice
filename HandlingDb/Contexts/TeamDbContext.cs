@@ -7,6 +7,7 @@ namespace HandlingDb.Contexts
     {
         public DbSet<CricketerDetails> UserDeatils { get; set; }
         public DbSet<Customer> CustomerRecords { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<OrnamentalFish> fish {  get; set; }
         public DbSet<Desktop> desktopRecords { get; set; }
