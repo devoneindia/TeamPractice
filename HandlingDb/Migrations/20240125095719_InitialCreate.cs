@@ -53,16 +53,16 @@ namespace HandlingDb.Migrations
                     player_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     player_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    player_number = table.Column<string>(type: "character varying(4)", maxLength: 4, nullable: false),
+                    player_number = table.Column<string>(type: "character varying(4)", maxLength: 4, nullable: true),
                     gender = table.Column<bool>(type: "boolean", nullable: false),
-                    age = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
-                    city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    nation = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    mobile = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    address = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    address2 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    address3 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    address4 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    age = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: true),
+                    city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    nation = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    mobile = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    address = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    address2 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    address3 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    address4 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -217,7 +217,7 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "item",
+                name: "product_items",
                 columns: table => new
                 {
                     item_id = table.Column<int>(type: "integer", nullable: false)
@@ -227,17 +227,17 @@ namespace HandlingDb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_item", x => x.item_id);
+                    table.PrimaryKey("PK_product_items", x => x.item_id);
                     table.ForeignKey(
-                        name: "FK_item_sub_categories_sub_category_id",
+                        name: "FK_product_items_sub_categories_sub_category_id",
                         column: x => x.sub_category_id,
                         principalTable: "sub_categories",
                         principalColumn: "sub_category_id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_item_sub_category_id",
-                table: "item",
+                name: "IX_product_items_sub_category_id",
+                table: "product_items",
                 column: "sub_category_id");
 
             migrationBuilder.CreateIndex(
@@ -262,9 +262,6 @@ namespace HandlingDb.Migrations
                 name: "desktop");
 
             migrationBuilder.DropTable(
-                name: "item");
-
-            migrationBuilder.DropTable(
                 name: "mobile");
 
             migrationBuilder.DropTable(
@@ -272,6 +269,9 @@ namespace HandlingDb.Migrations
 
             migrationBuilder.DropTable(
                 name: "ornamental_fish");
+
+            migrationBuilder.DropTable(
+                name: "product_items");
 
             migrationBuilder.DropTable(
                 name: "student_register");
