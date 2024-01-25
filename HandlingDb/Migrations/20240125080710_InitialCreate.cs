@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     /// <inheritdoc />
-    public partial class TeamDatabaseTables : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,56 +34,48 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "car",
+                name: "categories",
                 columns: table => new
                 {
-                    car_id = table.Column<int>(type: "integer", nullable: false)
+                    category_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    car_make = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    car_model = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    car_year = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    car_color = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    vin_number = table.Column<string>(type: "character varying(17)", maxLength: 17, nullable: true),
-                    owner_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    registration_number = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    insurance_provider = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    insurance_policy_number = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
+                    category_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_car", x => x.car_id);
+                    table.PrimaryKey("PK_categories", x => x.category_id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CricketerDeatils",
+                name: "cricketer_details",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    player_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Number = table.Column<string>(type: "text", nullable: false),
-                    Gender = table.Column<string>(type: "text", nullable: false),
-                    Age = table.Column<string>(type: "text", nullable: false),
-                    City = table.Column<string>(type: "text", nullable: false),
-                    Nation = table.Column<string>(type: "text", nullable: false),
-                    MobileNumber = table.Column<string>(type: "text", nullable: false),
-                    Address = table.Column<string>(type: "text", nullable: false),
-                    Address2 = table.Column<string>(type: "text", nullable: false),
-                    Address3 = table.Column<string>(type: "text", nullable: false),
-                    Address4 = table.Column<string>(type: "text", nullable: false)
+                    player_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    player_number = table.Column<string>(type: "character varying(4)", maxLength: 4, nullable: false),
+                    gender = table.Column<bool>(type: "boolean", nullable: false),
+                    age = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
+                    city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    nation = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    mobile = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    address = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    address2 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    address3 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    address4 = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CricketerDeatils", x => x.Id);
+                    table.PrimaryKey("PK_cricketer_details", x => x.player_id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer_Record",
+                name: "customer_record",
                 columns: table => new
                 {
-                    Cus_id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Cus_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     email = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     phone = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     addressLine1 = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
@@ -97,7 +89,7 @@ namespace HandlingDb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer_Record", x => x.Cus_id);
+                    table.PrimaryKey("PK_customer_record", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,6 +136,27 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "order_record",
+                columns: table => new
+                {
+                    order_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    order_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    customer_id = table.Column<int>(type: "integer", nullable: false),
+                    order_date = table.Column<DateTime>(type: "timestamp without time zone", maxLength: 100, nullable: false),
+                    total_amount = table.Column<decimal>(type: "numeric", maxLength: 100, nullable: false),
+                    shipping_Address = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    payment_method = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    is_paid = table.Column<bool>(type: "boolean", maxLength: 100, nullable: false),
+                    order_status = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    trackingnumber = table.Column<string>(name: "tracking-number", type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_order_record", x => x.order_id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ornamental_fish",
                 columns: table => new
                 {
@@ -182,6 +195,55 @@ namespace HandlingDb.Migrations
                 {
                     table.PrimaryKey("PK_student_register", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "sub_categories",
+                columns: table => new
+                {
+                    sub_category_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    category_id = table.Column<int>(type: "integer", nullable: false),
+                    sub_category_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sub_categories", x => x.sub_category_id);
+                    table.ForeignKey(
+                        name: "FK_sub_categories_categories_category_id",
+                        column: x => x.category_id,
+                        principalTable: "categories",
+                        principalColumn: "category_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "item",
+                columns: table => new
+                {
+                    item_id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    item_name = table.Column<string>(type: "text", nullable: true),
+                    sub_category_id = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_item", x => x.item_id);
+                    table.ForeignKey(
+                        name: "FK_item_sub_categories_sub_category_id",
+                        column: x => x.sub_category_id,
+                        principalTable: "sub_categories",
+                        principalColumn: "sub_category_id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_item_sub_category_id",
+                table: "item",
+                column: "sub_category_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_sub_categories_category_id",
+                table: "sub_categories",
+                column: "category_id");
         }
 
         /// <inheritdoc />
@@ -191,25 +253,34 @@ namespace HandlingDb.Migrations
                 name: "bike");
 
             migrationBuilder.DropTable(
-                name: "car");
+                name: "cricketer_details");
 
             migrationBuilder.DropTable(
-                name: "CricketerDeatils");
-
-            migrationBuilder.DropTable(
-                name: "Customer_Record");
+                name: "customer_record");
 
             migrationBuilder.DropTable(
                 name: "desktop");
 
             migrationBuilder.DropTable(
+                name: "item");
+
+            migrationBuilder.DropTable(
                 name: "mobile");
+
+            migrationBuilder.DropTable(
+                name: "order_record");
 
             migrationBuilder.DropTable(
                 name: "ornamental_fish");
 
             migrationBuilder.DropTable(
                 name: "student_register");
+
+            migrationBuilder.DropTable(
+                name: "sub_categories");
+
+            migrationBuilder.DropTable(
+                name: "categories");
         }
     }
 }
