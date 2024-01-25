@@ -1,0 +1,32 @@
+﻿//"DbShop": "User ID=localshop01;Password=LShop01;Host=localhost;Port=5432;Database=localshopdb;Connection Lifetime=0;"
+
+Run the following in PSQL Tool (postgres)
+
+	 
+	akila//CREATE USER localshop01 WITH password 'LShop01';
+
+	
+	//akila//CREATE DATABASE localshopdb;
+
+	
+	akila//GRANT ALL PRIVILEGES ON DATABASE localshopdb TO localshop01;
+
+	
+akila//	\c localshopdb
+	GRANT ALL on SCHEMA public to localshop01;
+
+
+	///to drop database and tables
+	// Drop and Recreate
+\c postgres;
+
+drop database localemployeedb;
+
+drop database localemployeedb WITH (FORCE);
+
+REVOKE ALL on schema public from localsanthozuser01;
+
+drop user localsanthozuser01;
+
+\c postgres;
+
