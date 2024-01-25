@@ -207,6 +207,10 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("addressLine4");
 
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasMaxLength(500)
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("dateofbirth");
                     b.Property<int?>("CustomerId")
                         .HasColumnType("integer");
 
@@ -252,6 +256,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("customer_record");
                     b.HasIndex("CustomerId");
 
                     b.ToTable("customer_record");
@@ -317,8 +322,6 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("CustomerId");
-
                     b.ToTable("order_record");
                 });
 
@@ -378,42 +381,21 @@ namespace HandlingDb.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ssd");
+                    b.HasIndex("CustomerId");
 
+                    b.ToTable("order_record");
                     b.HasKey("Id");
 
                     b.ToTable("desktop");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Item", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("item_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("item_name");
-
-                    b.Property<int?>("SubCategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubCategoryId");
-
-                    b.ToTable("item");
-                });
-
+            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
             modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("mobile_id");
+                        .HasColumnName("desktop_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -490,6 +472,58 @@ namespace HandlingDb.Migrations
                         .HasColumnName("life_span");
 
                     b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("item");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("mobile_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("brand");
+
+                    b.Property<string>("Graphics")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("graphics");
+
+                    b.Property<DateOnly>("ManufactureDate")
+                        .HasColumnType("date")
+                        .HasColumnName("manufacture_date");
+
+                    b.Property<string>("Os")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os");
+
+                    b.Property<string>("OsVersion")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os_version");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer")
+                        .HasColumnName("price");
+
+                    b.Property<string>("Processor")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
@@ -522,6 +556,30 @@ namespace HandlingDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ornamental_fish");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Products", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("item_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("item");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
@@ -597,25 +655,7 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
-                {
-                    b.HasOne("HandlingDb.Models.Customer", null)
-                        .WithMany("CustomerDetails")
-                        .HasForeignKey("CustomerId");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
-                {
-                    b.HasOne("HandlingDb.Models.Customer", "Customers")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customers");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Item", b =>
+            modelBuilder.Entity("HandlingDb.Models.Products", b =>
                 {
                     b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
                         .WithMany("Items")
@@ -638,11 +678,6 @@ namespace HandlingDb.Migrations
             modelBuilder.Entity("HandlingDb.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
-                {
-                    b.Navigation("CustomerDetails");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>

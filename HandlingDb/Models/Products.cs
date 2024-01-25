@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("item")]
-    public class Item
+    [Table("products")]
+    public class Products
     {
         [Key]
-        [Column("item_id")]
+        [Column("product_id")]
         public int Id { get; set; }
 
-        [Column("item_name")]
+        [Column("product_name")]
         public string? Name { get; set; }
 
         [Column("sub_category_id")]
