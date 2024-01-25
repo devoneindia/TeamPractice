@@ -22,6 +22,54 @@ namespace HandlingDb.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("shop_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FishFoodFoodId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("FoodName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("food_name");
+
+                    b.Property<string>("FoodPrice")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PackingFee")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("packing_fee");
+
+                    b.Property<string>("PricePerPair")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("price_per_pair");
+
+                    b.Property<string>("PricePerPiece")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("price_per_piece");
+
+                    b.Property<string>("ShopName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("shop_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FishFoodFoodId");
+
+                    b.ToTable("aquarium_shop");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Bike", b =>
                 {
                     b.Property<int>("Id")
@@ -198,10 +246,6 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("addressLine4");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasMaxLength(500)
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("dateofbirth");
                     b.Property<int?>("CustomerId")
                         .HasColumnType("integer");
 
@@ -247,7 +291,6 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("customer_record");
                     b.HasIndex("CustomerId");
 
                     b.ToTable("customer_record");
@@ -313,6 +356,8 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("OrderId");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("order_record");
                 });
 
@@ -372,21 +417,47 @@ namespace HandlingDb.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ssd");
-                    b.HasIndex("CustomerId");
 
-                    b.ToTable("order_record");
                     b.HasKey("Id");
 
                     b.ToTable("desktop");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
+            modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
+                {
+                    b.Property<int>("FoodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("food_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FoodId"));
+
+                    b.Property<int?>("FishFoodFoodId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("FoodName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("food_name");
+
+                    b.Property<string>("FoodPrice")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("food_price");
+
+                    b.HasKey("FoodId");
+
+                    b.HasIndex("FishFoodFoodId");
+
+                    b.ToTable("fish_food");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("desktop_id");
+                        .HasColumnName("mobile_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -447,6 +518,9 @@ namespace HandlingDb.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AquariumShopId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Colour")
                         .IsRequired()
                         .HasColumnType("text")
@@ -463,58 +537,6 @@ namespace HandlingDb.Migrations
                         .HasColumnName("life_span");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("item_name");
-
-                    b.Property<int?>("SubCategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubCategoryId");
-
-                    b.ToTable("item");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("mobile_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("brand");
-
-                    b.Property<string>("Graphics")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("graphics");
-
-                    b.Property<DateOnly>("ManufactureDate")
-                        .HasColumnType("date")
-                        .HasColumnName("manufacture_date");
-
-                    b.Property<string>("Os")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os");
-
-                    b.Property<string>("OsVersion")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("os_version");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer")
-                        .HasColumnName("price");
-
-                    b.Property<string>("Processor")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
@@ -546,31 +568,34 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AquariumShopId");
+
                     b.ToTable("ornamental_fish");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.ProductItems", b =>
+            modelBuilder.Entity("HandlingDb.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("item_id");
+                        .HasColumnName("product_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
-                        .HasColumnName("item_name");
+                        .HasColumnName("product_name");
 
-                    b.Property<int?>("SubCategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("product_items");
+                    b.ToTable("product");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
@@ -646,13 +671,49 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.ProductItems", b =>
+            modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
                 {
-                    b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
-                        .WithMany("Items")
-                        .HasForeignKey("SubCategoryId");
+                    b.HasOne("HandlingDb.Models.FishFood", "FishFood")
+                        .WithMany()
+                        .HasForeignKey("FishFoodFoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("SubCategory");
+                    b.Navigation("FishFood");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", null)
+                        .WithMany("CustomerDetails")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", "Customers")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customers");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
+                {
+                    b.HasOne("HandlingDb.Models.FishFood", null)
+                        .WithMany("fishFoods")
+                        .HasForeignKey("FishFoodFoodId");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.OrnamentalFish", b =>
+                {
+                    b.HasOne("HandlingDb.Models.AquariumShop", "AquariumShop")
+                        .WithMany("ornamentalFish")
+                        .HasForeignKey("AquariumShopId");
+
+                    b.Navigation("AquariumShop");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
@@ -666,14 +727,24 @@ namespace HandlingDb.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
+                {
+                    b.Navigation("ornamentalFish");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("CustomerDetails");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
+                {
+                    b.Navigation("fishFoods");
                 });
 #pragma warning restore 612, 618
         }

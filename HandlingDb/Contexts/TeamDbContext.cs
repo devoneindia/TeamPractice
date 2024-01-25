@@ -8,7 +8,7 @@ namespace HandlingDb.Contexts
     {
         public DbSet<CricketerDetails> UserDeatils { get; set; }
         public DbSet<Customer> CustomerRecords { get; set; }
-        //public DbSet<Products> Product { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<OrnamentalFish> fish {  get; set; }
         public DbSet<Desktop> desktopRecords { get; set; }
@@ -17,6 +17,8 @@ namespace HandlingDb.Contexts
         public DbSet<Bike> bikes { get; set; }
         public DbSet<CricketerDetails> cricketerData { get; set; }
         public DbSet<ProductItems> productsData { get; set; }
+        public DbSet<CricketerDetails> CricketerDeatils { get; set; }
+       
         public DbSet<SubCategory> subcategories { get; set; }
         public DbSet<Category> categories { get; set; }
         

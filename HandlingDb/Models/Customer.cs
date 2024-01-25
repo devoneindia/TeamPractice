@@ -12,6 +12,10 @@ namespace HandlingDb.Models
         [MaxLength(100)]
         [Column("name")]
         public string Name { get; set; } = string.Empty;
+        
+        [ForeignKey("product")]
+        [Column("product_id")]
+        public int ProductId { get; set; }
         [MaxLength(500)]
         [Column("email")]
         public string Email { get; set; } = string.Empty;
