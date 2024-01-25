@@ -1,4 +1,3 @@
-using HandlingDb.Components.Pages;
 using HandlingDb.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,11 +18,10 @@ namespace HandlingDb.Contexts
         public DbSet<StudentRegister> data { get; set; }
         public DbSet<Bike> bikes { get; set; }
         public DbSet<CricketerDetails> cricketerData { get; set; }
-        //public DbSet<ProductItems> productsData { get; set; }
         public DbSet<CricketerDetails> CricketerDeatils { get; set; }
-       
-        public DbSet<SubCategory> subcategories { get; set; }
-        public DbSet<Category> categories { get; set; }
+        public DbSet<PravProducts> ProductsData { get; set; }
+        public DbSet<PravSubCategory> Subcategories { get; set; }
+        public DbSet<PravCategory> Categories { get; set; }
         
         public TeamDbContext()
         {

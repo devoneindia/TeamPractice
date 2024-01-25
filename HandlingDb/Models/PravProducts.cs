@@ -3,18 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    [Table("categories")]
-    public class Category
+    [Table("prav_product_details")]
+    public class PravProducts
     {
         [Key]
-        [Column("category_id")]
         public int Id { get; set; }
 
-       
-        [MaxLength(100)]
-        [Column("category_name")]
+        [Required]
         public string? Name { get; set; }
 
-        public virtual ICollection<SubCategory>? SubCategories { get; set; }
+
+        public int? SubCategoryId { get; set; }
+        public virtual PravSubCategory? SubCategory { get; set; }
     }
 }
