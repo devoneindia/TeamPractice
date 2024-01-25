@@ -12,9 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240125095719_InitialCreate")]
->>>>>>>> 8eb6dd43c6b2d65a47428e787c6a2f1d21c45c8d:HandlingDb/Migrations/20240125080710_InitialCreate.Designer.cs
-    partial class InitialCreate
+    [Migration("20240124203429_update_foreignkey")]
+    partial class update_foreignkey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,31 +110,37 @@ namespace HandlingDb.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address");
 
                     b.Property<string>("Address2")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address2");
 
                     b.Property<string>("Address3")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address3");
 
                     b.Property<string>("Address4")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("address4");
 
                     b.Property<string>("Age")
+                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("character varying(2)")
                         .HasColumnName("age");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("city");
@@ -145,6 +150,7 @@ namespace HandlingDb.Migrations
                         .HasColumnName("gender");
 
                     b.Property<string>("MobileNumber")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
                         .HasColumnName("mobile");
@@ -155,11 +161,13 @@ namespace HandlingDb.Migrations
                         .HasColumnName("player_name");
 
                     b.Property<string>("Nation")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("nation");
 
                     b.Property<string>("Number")
+                        .IsRequired()
                         .HasMaxLength(4)
                         .HasColumnType("character varying(4)")
                         .HasColumnName("player_number");
@@ -202,6 +210,9 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("addressLine4");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasMaxLength(500)
                         .HasColumnType("timestamp without time zone")
@@ -243,6 +254,8 @@ namespace HandlingDb.Migrations
                         .HasColumnName("subscriptionstatus");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("customer_record");
                 });
@@ -306,6 +319,8 @@ namespace HandlingDb.Migrations
                         .HasColumnName("tracking-number");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("order_record");
                 });
@@ -512,30 +527,6 @@ namespace HandlingDb.Migrations
                     b.ToTable("ornamental_fish");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.ProductItems", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("item_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("item_name");
-
-                    b.Property<int?>("SubCategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubCategoryId");
-
-                    b.ToTable("product_items");
-                });
-
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
                 {
                     b.Property<int>("Id")
@@ -609,7 +600,25 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Products", b =>
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", null)
+                        .WithMany("CustomerDetails")
+                        .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", "Customers")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customers");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Item", b =>
                 {
                     b.HasOne("HandlingDb.Models.SubCategory", "SubCategory")
                         .WithMany("Items")
@@ -632,6 +641,11 @@ namespace HandlingDb.Migrations
             modelBuilder.Entity("HandlingDb.Models.Category", b =>
                 {
                     b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
+                {
+                    b.Navigation("CustomerDetails");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>

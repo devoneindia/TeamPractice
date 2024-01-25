@@ -482,7 +482,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
-/HandlingDb/appsettings.local.json
+
 /CommonPropertyPractice/appsettings.local.json
 /CommonPropertyPractice/appsettings.local.json
 /CommonPropertyPractice/wwwroot/appsettings.local.json
+

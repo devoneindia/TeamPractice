@@ -202,6 +202,13 @@ namespace HandlingDb.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("dateofbirth");
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasMaxLength(500)
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("dateofbirth");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -239,6 +246,9 @@ namespace HandlingDb.Migrations
                         .HasColumnName("subscriptionstatus");
 
                     b.HasKey("Id");
+
+                    b.ToTable("customer_record");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("customer_record");
                 });
@@ -362,18 +372,21 @@ namespace HandlingDb.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("ssd");
+                    b.HasIndex("CustomerId");
 
+                    b.ToTable("order_record");
                     b.HasKey("Id");
 
                     b.ToTable("desktop");
                 });
 
+            modelBuilder.Entity("HandlingDb.Models.Desktop", b =>
             modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("mobile_id");
+                        .HasColumnName("desktop_id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
@@ -450,6 +463,58 @@ namespace HandlingDb.Migrations
                         .HasColumnName("life_span");
 
                     b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("item_name");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("item");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.Mobile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("mobile_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("brand");
+
+                    b.Property<string>("Graphics")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("graphics");
+
+                    b.Property<DateOnly>("ManufactureDate")
+                        .HasColumnType("date")
+                        .HasColumnName("manufacture_date");
+
+                    b.Property<string>("Os")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os");
+
+                    b.Property<string>("OsVersion")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("os_version");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer")
+                        .HasColumnName("price");
+
+                    b.Property<string>("Processor")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
