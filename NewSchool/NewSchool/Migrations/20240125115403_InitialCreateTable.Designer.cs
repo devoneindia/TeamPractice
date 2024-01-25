@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NewSchool.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    [Migration("20240124172109_InitialCreateTable")]
+    [Migration("20240125115403_InitialCreateTable")]
     partial class InitialCreateTable
     {
         /// <inheritdoc />
@@ -34,29 +34,30 @@ namespace NewSchool.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("integer")
+                        .HasColumnName("student_id");
+
                     b.Property<string>("StudentRecord")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("student_record");
 
-                    b.Property<string>("TeacherRecord")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("teacher_record");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("school");
                 });
 
             modelBuilder.Entity("NewSchool.Models.Student", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -87,12 +88,17 @@ namespace NewSchool.Migrations
                         .HasColumnType("text")
                         .HasColumnName("section");
 
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("student");
                 });
@@ -134,6 +140,29 @@ namespace NewSchool.Migrations
                     b.HasKey("id");
 
                     b.ToTable("teacher");
+                });
+
+            modelBuilder.Entity("NewSchool.Models.School", b =>
+                {
+                    b.HasOne("NewSchool.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("NewSchool.Models.Student", b =>
+                {
+                    b.HasOne("NewSchool.Models.Student", null)
+                        .WithMany("Students")
+                        .HasForeignKey("StudentId");
+                });
+
+            modelBuilder.Entity("NewSchool.Models.Student", b =>
+                {
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

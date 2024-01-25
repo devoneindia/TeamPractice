@@ -13,20 +13,6 @@ namespace NewSchool.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "school",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    student_record = table.Column<string>(type: "text", nullable: false),
-                    teacher_record = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_school", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "student",
                 columns: table => new
                 {
@@ -38,11 +24,17 @@ namespace NewSchool.Migrations
                     @class = table.Column<string>(name: "class", type: "text", nullable: false),
                     section = table.Column<string>(type: "text", nullable: false),
                     blood_group = table.Column<string>(type: "text", nullable: false),
-                    address = table.Column<string>(type: "text", nullable: false)
+                    address = table.Column<string>(type: "text", nullable: false),
+                    StudentId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_student", x => x.student_id);
+                    table.ForeignKey(
+                        name: "FK_student_student_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "student",
+                        principalColumn: "student_id");
                 });
 
             migrationBuilder.CreateTable(
@@ -61,6 +53,36 @@ namespace NewSchool.Migrations
                 {
                     table.PrimaryKey("PK_teacher", x => x.teacher_id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "school",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    student_record = table.Column<string>(type: "text", nullable: false),
+                    student_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_school", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_school_student_student_id",
+                        column: x => x.student_id,
+                        principalTable: "student",
+                        principalColumn: "student_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_school_student_id",
+                table: "school",
+                column: "student_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_student_StudentId",
+                table: "student",
+                column: "StudentId");
         }
 
         /// <inheritdoc />
@@ -70,10 +92,10 @@ namespace NewSchool.Migrations
                 name: "school");
 
             migrationBuilder.DropTable(
-                name: "student");
+                name: "teacher");
 
             migrationBuilder.DropTable(
-                name: "teacher");
+                name: "student");
         }
     }
 }
