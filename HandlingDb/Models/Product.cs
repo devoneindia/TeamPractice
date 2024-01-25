@@ -12,7 +12,7 @@ namespace HandlingDb.Models
 
         [MaxLength(500)]
         [Column("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [MaxLength(500)]
         [Column("price")]
         public decimal Price { get; set; }

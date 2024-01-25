@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            @if (Categories == null || Categories.Count() == 0)
+            @if (PravProducts == null || PravProducts.Count() == 0)
             {
                 <p><em>No Employees Found</em></p>
             }
@@ -24,14 +24,16 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Sub Category Id</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var employee in Categories)
+                        @foreach (var employee in PravProducts)
                         {
                             <tr>
                                 <td>@employee.Id</td>
                                 <td>@employee.Name</td>
+                                <td>@employee.SubCategoryId</td>
                             </tr>
                         }
                     </tbody>

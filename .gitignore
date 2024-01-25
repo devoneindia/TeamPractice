@@ -487,3 +487,5 @@ $RECYCLE.BIN/
 /CommonPropertyPractice/appsettings.local.json
 /CommonPropertyPractice/wwwroot/appsettings.local.json
 
+/NewBrand/NewBrand/appsettings.local.json
+/HandlingDb/appsettings.local.json
