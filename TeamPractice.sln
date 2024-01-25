@@ -4,9 +4,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandlingDb", "HandlingDb\HandlingDb.csproj", "{A24F80E2-96AA-4159-8057-E8859C32F980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSchool", "NewSchool\NewSchool\NewSchool.csproj", "{5E857CA7-D25A-4CE3-AEA8-AD4A45F458A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewSchool", "NewSchool\NewSchool\NewSchool.csproj", "{5E857CA7-D25A-4CE3-AEA8-AD4A45F458A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSchool.Client", "NewSchool\NewSchool.Client\NewSchool.Client.csproj", "{EA111629-B110-4E9E-9010-7C9F796712A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewSchool.Client", "NewSchool\NewSchool.Client\NewSchool.Client.csproj", "{EA111629-B110-4E9E-9010-7C9F796712A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,9 +30,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD2A804D-D53C-44BF-80A2-095953BC8CD2}
-
 	EndGlobalSection
 EndGlobal

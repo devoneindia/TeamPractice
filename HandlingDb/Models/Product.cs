@@ -1,27 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HandlingDb.Models
 {
-    public class Product
+    [Table("product")] //Master table
+    public class Product 
     {
-        
-        [Table("product_record")]
-        public class Prodeuct
-        {
-            [Column("id")]
-            [Key]
-            public int Id { get; set; }
-            [MaxLength(100)]
-            [Column("name")]
-            public string ProductName { get; set; }
-            [MaxLength(100)]
-            [Column("price")]
-            public decimal Price { get; set; }
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
 
-        }
+        [MaxLength(500)]
+        [Column("name")]
+        public string Name { get; set; } = string.Empty;
+        [MaxLength(500)]
+        [Column("price")]
+        public decimal Price { get; set; } = decimal.Zero;
+
+       
+       
     }
-
-
 }
-
