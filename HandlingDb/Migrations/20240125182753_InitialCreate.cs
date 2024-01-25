@@ -173,6 +173,7 @@ namespace HandlingDb.Migrations
 
             migrationBuilder.CreateTable(
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
                 name: "prav_categories",
                 columns: table => new
                 {
@@ -188,6 +189,8 @@ namespace HandlingDb.Migrations
             migrationBuilder.CreateTable(
 ========
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
+========
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "product",
                 columns: table => new
                 {
@@ -243,7 +246,10 @@ namespace HandlingDb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
+========
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "aquarium_shop",
                 columns: table => new
                 {
@@ -354,6 +360,7 @@ namespace HandlingDb.Migrations
                 table: "ornamental_fish",
                 column: "AquariumShopId");
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_prav_product_details_SubCategoryId",
@@ -365,6 +372,12 @@ namespace HandlingDb.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_prav_sub_categories_category_id",
                 table: "prav_sub_categories",
+========
+
+            migrationBuilder.CreateIndex(
+                name: "IX_sub_categories_category_id",
+                table: "sub_categories",
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 column: "category_id");
         }
 
@@ -394,11 +407,14 @@ namespace HandlingDb.Migrations
 
             migrationBuilder.DropTable(
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
                 name: "prav_product_details");
 
             migrationBuilder.DropTable(
 ========
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
+========
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "product");
 
             migrationBuilder.DropTable(
@@ -410,7 +426,10 @@ namespace HandlingDb.Migrations
                 name: "sub_categories");
 
             migrationBuilder.DropTable(
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.cs
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.cs
+========
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.cs
                 name: "aquarium_shop");
 
             migrationBuilder.DropTable(

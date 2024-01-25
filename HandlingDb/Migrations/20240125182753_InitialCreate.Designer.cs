@@ -13,11 +13,16 @@ namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
     [Migration("20240125182753_InitialCreate")]
 ========
     [Migration("20240125111530_InitialCreate")]
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
     partial class InitialCreate
+========
+    [Migration("20240125115536_update_ForginKey_ordertable")]
+    partial class update_ForginKey_ordertable
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,9 +239,6 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("addressLine4");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasMaxLength(500)
                         .HasColumnType("timestamp without time zone")
@@ -283,7 +285,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("customer_record");
                 });
@@ -352,6 +354,13 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("OrderId");
 
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
+========
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
+
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
                     b.ToTable("order_record");
                 });
 
@@ -568,23 +577,32 @@ namespace HandlingDb.Migrations
                 });
 
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.PravCategory", b =>
 ========
             modelBuilder.Entity("HandlingDb.Models.Product", b =>
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
+========
+            modelBuilder.Entity("HandlingDb.Models.Product", b =>
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
                         .HasColumnName("category_id");
 ========
                         .HasColumnName("id");
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
+========
+                        .HasColumnName("id");
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
 <<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
@@ -678,6 +696,20 @@ namespace HandlingDb.Migrations
                     b.HasKey("Id");
 
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
+========
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("name");
+
+                    b.Property<decimal>("Price")
+                        .HasMaxLength(500)
+                        .HasColumnType("numeric")
+                        .HasColumnName("price");
+
+                    b.HasKey("Id");
+
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
                     b.ToTable("product");
                 });
 
@@ -756,7 +788,10 @@ namespace HandlingDb.Migrations
                     b.ToTable("sub_categories");
                 });
 
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
 >>>>>>>> 869e75858d63fbf769bc241e49cf63b9a796f055:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
+========
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
                 {
                     b.HasOne("HandlingDb.Models.FishFood", "FishFood")
@@ -770,11 +805,37 @@ namespace HandlingDb.Migrations
 
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
                 {
-                    b.HasOne("HandlingDb.Models.Customer", null)
-                        .WithMany("CustomerDetails")
-                        .HasForeignKey("CustomerId");
+                    b.HasOne("HandlingDb.Models.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Products");
                 });
 
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
+========
+            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", "customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HandlingDb.Models.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Products");
+
+                    b.Navigation("customer");
+                });
+
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
                 {
                     b.HasOne("HandlingDb.Models.FishFood", null)
@@ -816,9 +877,15 @@ namespace HandlingDb.Migrations
                     b.Navigation("ornamentalFish");
                 });
 
+<<<<<<<< HEAD:HandlingDb/Migrations/20240125182753_InitialCreate.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
                 {
                     b.Navigation("CustomerDetails");
+========
+            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+                {
+                    b.Navigation("SubCategories");
+>>>>>>>> main:HandlingDb/Migrations/20240125115536_update_ForginKey_ordertable.Designer.cs
                 });
 
             modelBuilder.Entity("HandlingDb.Models.FishFood", b =>

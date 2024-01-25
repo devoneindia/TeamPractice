@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop", "OnlineShop\On
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewBrand", "NewBrand\NewBrand\NewBrand.csproj", "{08CFA6A6-23C1-4190-974C-121A9476D04A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewBrand.Client", "NewBrand\NewBrand.Client\NewBrand.Client.csproj", "{30CA13A2-E7A3-4739-A4F9-96D78FCD9488}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSchool.Client", "NewSchool\NewSchool.Client\NewSchool.Client.csproj", "{EA111629-B110-4E9E-9010-7C9F796712A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

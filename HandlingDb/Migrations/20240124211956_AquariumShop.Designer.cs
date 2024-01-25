@@ -12,8 +12,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
+<<<<<<<< HEAD:HandlingDb/Migrations/20240124211956_AquariumShop.Designer.cs
     [Migration("20240124211956_AquariumShop")]
     partial class AquariumShop
+========
+    [Migration("20240125111530_InitialCreate")]
+    partial class InitialCreate
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -287,6 +292,10 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("pinCode");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
+
                     b.Property<string>("State")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -343,6 +352,10 @@ namespace HandlingDb.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("payment_method");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer")
+                        .HasColumnName("product_id");
 
                     b.Property<string>("ShippingAderess")
                         .IsRequired()
@@ -602,6 +615,34 @@ namespace HandlingDb.Migrations
                     b.ToTable("ornamental_fish");
                 });
 
+<<<<<<<< HEAD:HandlingDb/Migrations/20240124211956_AquariumShop.Designer.cs
+========
+            modelBuilder.Entity("HandlingDb.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("name");
+
+                    b.Property<decimal>("Price")
+                        .HasMaxLength(500)
+                        .HasColumnType("numeric")
+                        .HasColumnName("price");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("product");
+                });
+
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
                 {
                     b.Property<int>("Id")
@@ -686,6 +727,16 @@ namespace HandlingDb.Migrations
                     b.Navigation("FishFood");
                 });
 
+<<<<<<<< HEAD:HandlingDb/Migrations/20240124211956_AquariumShop.Designer.cs
+========
+            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", null)
+                        .WithMany("CustomerDetails")
+                        .HasForeignKey("CustomerId");
+                });
+
+>>>>>>>> main:HandlingDb/Migrations/20240125111530_InitialCreate.Designer.cs
             modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
                 {
                     b.HasOne("HandlingDb.Models.FishFood", null)
