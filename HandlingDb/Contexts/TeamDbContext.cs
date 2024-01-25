@@ -1,4 +1,4 @@
-﻿using HandlingDb.Components.Pages;
+using HandlingDb.Components.Pages;
 using HandlingDb.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +8,8 @@ namespace HandlingDb.Contexts
     public class TeamDbContext : DbContext
     {
         public DbSet<CricketerDetails> UserDeatils { get; set; }
+        public DbSet<AquariumShop>  shops { get; set; }
+        public DbSet<FishFood> fishFoods { get; set; }
         public DbSet<Customer> CustomerRecords { get; set; }
         public DbSet<Product> ProductsTable { get; set; }
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
