@@ -5,7 +5,7 @@
         public Customer CustomerModel { get; set; } = new Customer();
 
         public List<Customer> Customers { get; set; }
-        
+
 
         public void HandleValidSubmit()
         {

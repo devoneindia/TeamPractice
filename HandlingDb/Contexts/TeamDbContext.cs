@@ -6,6 +6,9 @@ namespace HandlingDb.Contexts
 {
     public class TeamDbContext : DbContext
     {
+        public DbSet<SanClass> sanclasses { get; set; }
+        public DbSet<SanStudent> sanStudents  { get; set; }
+        public DbSet<SanTeacher> sanTeachers  { get; set; }
         public DbSet<CricketerDetails> UserDeatils { get; set; }
         public DbSet<AquariumShop>  shops { get; set; }
         public DbSet<FishFood> fishFoods { get; set; }
@@ -34,7 +37,7 @@ namespace HandlingDb.Contexts
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile("appsettings.local.json", optional: true)
                 .Build();
-            string dbConnString = configurationInstance["ConnectionStrings:DbTeam"] ?? "";
+            string dbConnString = configurationInstance["ConnectionStrings:Db"] ?? "";
             optionsBuilder.UseNpgsql(dbConnString);
             base.OnConfiguring(optionsBuilder);
         }

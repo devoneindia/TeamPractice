@@ -1,1 +1,27 @@
-﻿
+﻿@* @page "/customer"
+
+<h3>Add Customer "Details"</h3>
+
+<EditForm Model="CustomerModel" OnValidSubmit="@HandleValidSubmit">
+    <div class="container">
+        <div class="row">
+            <div>
+                <label for="productName">Customer Name:</label>
+                <input id="productName" @bind="CustomerModel.Name"/>
+
+                <label for="productName">Product Price:</label>
+                <input id="productName" @bind="CustomerModel.Email" />
+
+            </div>
+
+            <div class="col-4">
+              @*   <button class="btn btn-primary" @onclick="">Add Product</button> *@
+       @*      </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+}
+ *@ 
