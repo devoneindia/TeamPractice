@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240125111530_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240125190319_SanTableAdded")]
+    partial class SanTableAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,9 +249,6 @@ namespace HandlingDb.Migrations
                         .HasColumnType("character varying(500)")
                         .HasColumnName("addressLine4");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasMaxLength(500)
                         .HasColumnType("timestamp without time zone")
@@ -298,7 +295,7 @@ namespace HandlingDb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("customer_record");
                 });
@@ -366,6 +363,10 @@ namespace HandlingDb.Migrations
                         .HasColumnName("tracking-number");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("order_record");
                 });
@@ -607,6 +608,124 @@ namespace HandlingDb.Migrations
                     b.ToTable("product");
                 });
 
+            modelBuilder.Entity("HandlingDb.Models.SanClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("class_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("class");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("san_class");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SanStudent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("student_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("address");
+
+                    b.Property<string>("BloodGroup")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("blood_group");
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("class");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("integer")
+                        .HasColumnName("class_id");
+
+                    b.Property<DateOnly>("Dob")
+                        .HasColumnType("date")
+                        .HasColumnName("dob");
+
+                    b.Property<string>("FatherName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("father_name");
+
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("section");
+
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("student_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("san_student");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SanTeacher", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("teacher_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("address");
+
+                    b.Property<string>("BloodGroup")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("blood_group");
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("class");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("integer")
+                        .HasColumnName("class_id");
+
+                    b.Property<string>("Section")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("section");
+
+                    b.Property<string>("TeacherName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("teacher_name");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("san_teacher");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.StudentRegister", b =>
                 {
                     b.Property<int>("Id")
@@ -693,9 +812,32 @@ namespace HandlingDb.Migrations
 
             modelBuilder.Entity("HandlingDb.Models.Customer", b =>
                 {
-                    b.HasOne("HandlingDb.Models.Customer", null)
-                        .WithMany("CustomerDetails")
-                        .HasForeignKey("CustomerId");
+                    b.HasOne("HandlingDb.Models.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.CustomerOrder", b =>
+                {
+                    b.HasOne("HandlingDb.Models.Customer", "customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HandlingDb.Models.Product", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Products");
+
+                    b.Navigation("customer");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
@@ -712,6 +854,28 @@ namespace HandlingDb.Migrations
                         .HasForeignKey("AquariumShopId");
 
                     b.Navigation("AquariumShop");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SanStudent", b =>
+                {
+                    b.HasOne("HandlingDb.Models.SanClass", "SanClass")
+                        .WithMany("Students")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SanClass");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SanTeacher", b =>
+                {
+                    b.HasOne("HandlingDb.Models.SanClass", "SanClass")
+                        .WithMany("Teachers")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SanClass");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
@@ -735,14 +899,16 @@ namespace HandlingDb.Migrations
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Customer", b =>
-                {
-                    b.Navigation("CustomerDetails");
-                });
-
             modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
                 {
                     b.Navigation("fishFoods");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.SanClass", b =>
+                {
+                    b.Navigation("Students");
+
+                    b.Navigation("Teachers");
                 });
 #pragma warning restore 612, 618
         }
