@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HandlingDb.Components.Pages
 {
-    public partial class Products
+    public partial class PravSubCategoryPage
     {
-        public List<Category>? Categories { get; set; }
+        public List<PravSubCategory>? PravSubCategories { get; set; }
         protected async override Task OnInitializedAsync()
         {
             await GetEmployees();
@@ -16,19 +16,28 @@ namespace HandlingDb.Components.Pages
         {
             using (TeamDbContext employeeDbContext = new TeamDbContext())
             {
-                Categories = await employeeDbContext.categories.ToListAsync();
+                PravSubCategories = await employeeDbContext.Subcategories.ToListAsync();
             }
         }
 
-        public async Task AddProducts()
+        public async Task AddSubCategory()
         {
-            Category newUser = new Category();
-            newUser.Name = RandomName(random.Next(5, 50));
-            //newUser.SubCategoryId =  Have to map the subcategoryId
-            //newUser.SubCategoryId = random.Next(100000000, 999999999);
-             using (TeamDbContext employeeDbContext = new TeamDbContext())
+            PravSubCategory newSubCategory = new PravSubCategory();
+            newSubCategory.Name = RandomName(random.Next(5, 50));
+
+            int categoryId = -1;
+            List<int> existingCategoryIds = new List<int>();
+            using(TeamDbContext categoriesDbContext = new TeamDbContext())
             {
-                employeeDbContext.categories.Add(newUser);
+                existingCategoryIds = categoriesDbContext.Categories.Select(ct=>ct.Id).ToList();                
+            }
+            categoryId = existingCategoryIds[random.Next(1, existingCategoryIds.Count)];
+            newSubCategory.CategoryId = categoryId;
+
+
+            using (TeamDbContext employeeDbContext = new TeamDbContext())
+            {
+                employeeDbContext.Subcategories.Add(newSubCategory);
                 employeeDbContext.SaveChanges();
             }
             await GetEmployees();
