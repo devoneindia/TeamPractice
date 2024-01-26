@@ -4,7 +4,7 @@
     {
         public Customer CustomerModel { get; set; } = new Customer();
 
-        public List<Customer> CustomerList { get; set; }
+        public List<Customer>? CustomerList { get; set; }
 
 
         //public CustomerPage() { }

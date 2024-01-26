@@ -1,15 +1,29 @@
 ﻿@page "/prav-category"
+@* @inject NavigationManager NavigationManager *@
+@using HandlingDb.Models;
 <h3>Categories</h3>
 
-
+@* @code{
+    private int selectedCategoryId;
+    public void SelectCategory(int categoryId)
+    {
+        selectedCategoryId = categoryId;
+        NavigationManager.NavigateTo($"/prav-sub-category/{selectedCategoryId}");
+    }
+} *@
 <div class="container">
     <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4"></div>
+        <form>
         <div class="col-4">
-            <button class="btn btn-primary" @onclick="AddCategory">Add Category</button>
-
+                <InputNumber @bind-Value="PravCategoryValue.Id" />
+       </div>
+        <div class="col-4">
+                <InputText placeholder="Enter Category" @bind-Value="PravCategoryValue.Name" />
         </div>
+        <div class="col-4">
+            <button class="btn btn-primary" @onclick="AddCategory">Add Category Name</button>
+        </div>
+        </form>
     </div>
     <div class="row">
         <div class="col-12">
@@ -24,14 +38,16 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>SubCategoryId</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var employee in PravCategories)
+                        @foreach (var category in PravCategories)
                         {
                             <tr>
-                                <td>@employee.Id</td>
-                                <td>@employee.Name</td>
+                                <td>@category.Id</td>
+                                <td>@category.Name</td>
+                                <button class="btn btn-primary">Select</button>
                             </tr>
                         }
                     </tbody>

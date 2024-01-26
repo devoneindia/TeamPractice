@@ -8,7 +8,7 @@ namespace HandlingDb.Models
     {
         [Key]
         [Column("category_id")]
-        public int Id { get; set; }
+        public int Id { get; set; } = 1001;
 
        
         [MaxLength(100)]

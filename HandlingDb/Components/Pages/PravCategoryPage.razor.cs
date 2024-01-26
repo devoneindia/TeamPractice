@@ -1,12 +1,16 @@
 ﻿using HandlingDb.Contexts;
 using HandlingDb.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 
 namespace HandlingDb.Components.Pages
 {
     public partial class PravCategoryPage
     {
+       
         public List<PravCategory>? PravCategories { get; set; }
+
+        public PravCategory PravCategoryValue { get; set; } = new PravCategory();
         protected async override Task OnInitializedAsync()
         {
             await GetEmployees();
@@ -22,12 +26,14 @@ namespace HandlingDb.Components.Pages
 
         public async Task AddCategory()
         {
-            PravCategory newUser = new PravCategory();
-            newUser.Name = RandomName(random.Next(5, 50));
-           
-             using (TeamDbContext employeeDbContext = new TeamDbContext())
+            PravCategory newCategory = new PravCategory();
+            newCategory.Id = PravCategoryValue.Id;
+            newCategory.Name = PravCategoryValue.Name;
+            //newUser.Name = RandomName(random.Next(5, 50));
+
+            using (TeamDbContext employeeDbContext = new TeamDbContext())
             {
-                employeeDbContext.Categories.Add(newUser);
+                employeeDbContext.Categories.Add(newCategory);
                 employeeDbContext.SaveChanges();
             }
             await GetEmployees();
@@ -35,7 +41,7 @@ namespace HandlingDb.Components.Pages
 
         private Random random = new Random();
 
-        private string? RandomName(int length)
+        private string? RandomName(char length)
         {
             string alphabetArray = @"ABCDEFGHIJKLMNOPQRSTUVEWXZabcdefghijklmnopqrstuvewxz";
             string newWord = string.Empty;
