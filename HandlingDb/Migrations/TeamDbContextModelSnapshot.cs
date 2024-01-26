@@ -3,7 +3,6 @@ using System;
 using HandlingDb.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,11 +11,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HandlingDb.Migrations
 {
     [DbContext(typeof(TeamDbContext))]
-    [Migration("20240125190319_SanTableAdded")]
-    partial class SanTableAdded
+    partial class TeamDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,25 +124,6 @@ namespace HandlingDb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("bike");
-                });
-
-            modelBuilder.Entity("HandlingDb.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("category_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("category_name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("categories");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.CricketerDetails", b =>
@@ -583,6 +561,72 @@ namespace HandlingDb.Migrations
                     b.ToTable("ornamental_fish");
                 });
 
+            modelBuilder.Entity("HandlingDb.Models.PravCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("category_name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("prav_categories");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.PravProducts", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("prav_product_details");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.PravSubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("sub_category_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("sub_category_name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("prav_sub_categories");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -774,31 +818,6 @@ namespace HandlingDb.Migrations
                     b.ToTable("student_register");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("sub_category_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("category_id");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("sub_category_name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("sub_categories");
-                });
-
             modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
                 {
                     b.HasOne("HandlingDb.Models.FishFood", "FishFood")
@@ -856,6 +875,26 @@ namespace HandlingDb.Migrations
                     b.Navigation("AquariumShop");
                 });
 
+            modelBuilder.Entity("HandlingDb.Models.PravProducts", b =>
+                {
+                    b.HasOne("HandlingDb.Models.PravSubCategory", "SubCategory")
+                        .WithMany("Products")
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.PravSubCategory", b =>
+                {
+                    b.HasOne("HandlingDb.Models.PravCategory", "Category")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("HandlingDb.Models.SanStudent", b =>
                 {
                     b.HasOne("HandlingDb.Models.SanClass", "SanClass")
@@ -878,30 +917,24 @@ namespace HandlingDb.Migrations
                     b.Navigation("SanClass");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.SubCategory", b =>
-                {
-                    b.HasOne("HandlingDb.Models.Category", "Category")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("HandlingDb.Models.AquariumShop", b =>
                 {
                     b.Navigation("ornamentalFish");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.Category", b =>
+            modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
+                {
+                    b.Navigation("fishFoods");
+                });
+
+            modelBuilder.Entity("HandlingDb.Models.PravCategory", b =>
                 {
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("HandlingDb.Models.FishFood", b =>
+            modelBuilder.Entity("HandlingDb.Models.PravSubCategory", b =>
                 {
-                    b.Navigation("fishFoods");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("HandlingDb.Models.SanClass", b =>

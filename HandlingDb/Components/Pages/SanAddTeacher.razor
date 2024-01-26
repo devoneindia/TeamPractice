@@ -1,0 +1,62 @@
+﻿@page "/sanaddteacher"
+@using HandlingDb.Models
+
+<h3>AddTeacher</h3>
+<div class="container-fluid">
+
+    <EditForm Model=@tcr OnValidSubmit="AddTeacher">
+        <div class="card">
+            <div class="card-body">
+                    <label for="teacherId">Teacher ID:</label>
+                    <input id="teacherId" @bind="tcr.id" />
+
+                    <label for="teacherName">Teacher Name:</label>
+                    <input id="teacherName" @bind="tcr.TeacherName" />
+
+                    <label for="teacherClass">Class:</label>
+                    <input id="teacherClass" @bind="tcr.Class" />
+
+                    <label for="teacherSection">Section:</label>
+                    <input id="teacherSection" @bind="tcr.Section" />
+
+                    <label for="teacherBloodGroup">Blood Group:</label>
+                    <input id="teacherBloodGroup" @bind="tcr.BloodGroup" />
+
+                    <label for="teacherAddress">Address:</label>
+                    <input id="teacherAddress" @bind="tcr.Address" />
+
+                    <button class="btn btn-primary" @onclick="AddTeacher">Add Teacher</button>
+            </div>
+        </div>
+    </EditForm>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TeacherName</th>
+                <th>Class</th>
+                <th>Section</th>
+                <th>BloodGroup</th>
+                <th>Address</th>
+                <th>ClassId</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var getvalue in teacher ?? new List<SanTeacher>())
+            {
+                <tr>
+                    <td>@getvalue.id</td>
+                    <td>@getvalue.TeacherName</td>
+                    <td>@getvalue.Class</td>
+                    <td>@getvalue.Section</td>
+                    <td>@getvalue.BloodGroup</td>
+                    <td>@getvalue.Address</td>
+                    <td>@getvalue.ClassId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
