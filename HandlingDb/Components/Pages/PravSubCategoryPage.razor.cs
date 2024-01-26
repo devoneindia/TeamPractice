@@ -1,11 +1,13 @@
 ﻿using HandlingDb.Contexts;
 using HandlingDb.Models;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace HandlingDb.Components.Pages
 {
     public partial class PravSubCategoryPage
     {
+      
         public List<PravCategory> PravCategories { get; set; } 
             = new List<PravCategory>()
             { 
@@ -40,19 +42,17 @@ namespace HandlingDb.Components.Pages
         {
             PravSubCategory newSubCategory = new PravSubCategory();
             newSubCategory.Name = PravSubCategoryValues.Name;
-            //newSubCategory.CategoryId = selectedCategoryId;
             newSubCategory.CategoryId = PravSubCategoryValues.CategoryId;
 
-            int categoryId = -1;
-            List<int> existingCategoryIds = new List<int>();
-            using (TeamDbContext categoriesDbContext = new TeamDbContext())
-            {
-                existingCategoryIds = categoriesDbContext.Categories.Select(ct => ct.Id).ToList();
-            }
-            categoryId = existingCategoryIds[random.Next(1, existingCategoryIds.Count)];
-            newSubCategory.CategoryId = categoryId;
-
-
+            //int categoryId = -1;
+            //List<int> existingCategoryIds = new List<int>();
+            //using (TeamDbContext categoriesDbContext = new TeamDbContext())
+            //{
+            //    existingCategoryIds = categoriesDbContext.Categories.Select(ct => ct.Id).ToList();
+            //}
+            //categoryId = existingCategoryIds[random.Next(1, existingCategoryIds.Count)];
+            //newSubCategory.CategoryId = categoryId;
+                       
             using (TeamDbContext employeeDbContext = new TeamDbContext())
             {
                 employeeDbContext.Subcategories.Add(newSubCategory);
@@ -75,7 +75,18 @@ namespace HandlingDb.Components.Pages
         }
         private void OnDropdownChange(Microsoft.AspNetCore.Components.ChangeEventArgs e)
         {
-            PravSubCategoryValues.CategoryId = Convert.ToInt32(e.Value);
+                 PravSubCategoryValues.CategoryId = Convert.ToInt32(e.Value);
+            //PravCategory NewpravSubCategoryValues = new PravCategory();
+            //var PravSubCategoryValuesss = NewpravSubCategoryValues.Id;
+
+            //using(TeamDbContext teamdbContext  = new TeamDbContext())
+            //{
+            //    teamdbContext.Subcategories.Add(PravSubCategoryValues);
+            //    teamdbContext.SaveChanges();
+            //}
+            //await GetEmployees();
         }
+
+
     }
 }

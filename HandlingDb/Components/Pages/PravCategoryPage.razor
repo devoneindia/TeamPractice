@@ -13,17 +13,22 @@
 } *@
 <div class="container">
     <div class="row">
-        <form>
+    
         <div class="col-4">
-                <InputNumber @bind-Value="PravCategoryValue.Id" />
+                <div class="mb-3">
+                    <label class="form-label">Category Id</label>
+                    <InputNumber @bind-Value="PravCategoryValue.Id" />
+                </div>
+            <div class="mb-3">
+                <label class="form-label">Category Name</label>
+                <InputText placeholder="Enter Category Name" @bind-Value="PravCategoryValue.Name" />
+            </div>
+               
        </div>
-        <div class="col-4">
-                <InputText placeholder="Enter Category" @bind-Value="PravCategoryValue.Name" />
-        </div>
         <div class="col-4">
             <button class="btn btn-primary" @onclick="AddCategory">Add Category Name</button>
         </div>
-        </form>
+      
     </div>
     <div class="row">
         <div class="col-12">
@@ -38,7 +43,6 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>SubCategoryId</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +51,6 @@
                             <tr>
                                 <td>@category.Id</td>
                                 <td>@category.Name</td>
-                                <button class="btn btn-primary">Select</button>
                             </tr>
                         }
                     </tbody>

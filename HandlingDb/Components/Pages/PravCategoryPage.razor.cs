@@ -2,25 +2,33 @@
 using HandlingDb.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace HandlingDb.Components.Pages
 {
     public partial class PravCategoryPage
-    {
-       
+    {    
         public List<PravCategory>? PravCategories { get; set; }
 
         public PravCategory PravCategoryValue { get; set; } = new PravCategory();
         protected async override Task OnInitializedAsync()
         {
+            Log.Logger.Information("I am in OnInitializedAsync. Started...");
             await GetEmployees();
+            Log.Logger.Information("I am in OnInitializedAsync. Completed.");
         }
 
         private async Task GetEmployees()
         {
-            using (TeamDbContext employeeDbContext = new TeamDbContext())
+            try
             {
-                PravCategories = await employeeDbContext.Categories.ToListAsync();
+                using (TeamDbContext employeeDbContext = new TeamDbContext())
+                {
+                    PravCategories = await employeeDbContext.Categories.ToListAsync();
+                }
+            }catch(Exception ex)
+            {
+                Log.Logger.Error($"{ex}");
             }
         }
 

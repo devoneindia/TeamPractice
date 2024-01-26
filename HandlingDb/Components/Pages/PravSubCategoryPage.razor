@@ -15,20 +15,24 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <InputText @bind-Value="PravSubCategoryValues.Name" placeholder="Enter Sub-Category Name" />
-            <label>
-                Select your category:
+            <div class="mb-3">
+                <label class="form-label">SubCategory Name</label>
+                <InputText @bind-Value="PravSubCategoryValues.Name" placeholder="Enter Sub-Category Name" />
+            </div>
+           
+                <div class="mb-3">
+                    <label class="form-label">Select your category:</label>
                 <select @onchange="OnDropdownChange">
-                    <option value="">Select a value</option>
-                    @foreach (var pcat in PravCategories)
-                    {
-                        <option value="@pcat.Id">@pcat.Name</option>
-                    }
-                </select>
-            </label>
+                    <option value="@PravSubCategoryValues.CategoryId">Select a value</option>
+                        @foreach (var pcat in PravCategories)
+                        {
+                            <option value="@pcat.Id">@pcat.Name</option>
+                        }
+                    </select>
+                </div>
+              
            @*  <InputNumber @bind-Value=@selectedCategoryId /> *@
         </div>
-        <div class="col-4"></div>
         <div class="col-4">
             <button class="btn btn-primary" @onclick="AddSubCategory">Add Sub-category</button>
 
