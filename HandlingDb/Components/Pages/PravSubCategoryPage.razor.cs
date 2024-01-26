@@ -1,12 +1,29 @@
 ﻿using HandlingDb.Contexts;
 using HandlingDb.Models;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace HandlingDb.Components.Pages
 {
     public partial class PravSubCategoryPage
     {
+      
+        public List<PravCategory> PravCategories { get; set; } 
+            = new List<PravCategory>()
+            { 
+                new PravCategory() {
+                    Id = 1,
+                    Name = "MyDummyCategory",
+                    SubCategories = new List<PravSubCategory>()
+                } ,
+                new PravCategory() {
+                    Id = 2,
+                    Name = "MyDummyCategory2",
+                    SubCategories = new List<PravSubCategory>()
+                }
+            };
         public List<PravSubCategory>? PravSubCategories { get; set; }
+        public PravSubCategory? PravSubCategoryValues { get; set; } = new PravSubCategory();
         protected async override Task OnInitializedAsync()
         {
             await GetEmployees();
@@ -17,24 +34,25 @@ namespace HandlingDb.Components.Pages
             using (TeamDbContext employeeDbContext = new TeamDbContext())
             {
                 PravSubCategories = await employeeDbContext.Subcategories.ToListAsync();
+                PravCategories = await employeeDbContext.Categories.ToListAsync();
             }
         }
 
         public async Task AddSubCategory()
         {
             PravSubCategory newSubCategory = new PravSubCategory();
-            newSubCategory.Name = RandomName(random.Next(5, 50));
+            newSubCategory.Name = PravSubCategoryValues.Name;
+            newSubCategory.CategoryId = PravSubCategoryValues.CategoryId;
 
-            int categoryId = -1;
-            List<int> existingCategoryIds = new List<int>();
-            using(TeamDbContext categoriesDbContext = new TeamDbContext())
-            {
-                existingCategoryIds = categoriesDbContext.Categories.Select(ct=>ct.Id).ToList();                
-            }
-            categoryId = existingCategoryIds[random.Next(1, existingCategoryIds.Count)];
-            newSubCategory.CategoryId = categoryId;
-
-
+            //int categoryId = -1;
+            //List<int> existingCategoryIds = new List<int>();
+            //using (TeamDbContext categoriesDbContext = new TeamDbContext())
+            //{
+            //    existingCategoryIds = categoriesDbContext.Categories.Select(ct => ct.Id).ToList();
+            //}
+            //categoryId = existingCategoryIds[random.Next(1, existingCategoryIds.Count)];
+            //newSubCategory.CategoryId = categoryId;
+                       
             using (TeamDbContext employeeDbContext = new TeamDbContext())
             {
                 employeeDbContext.Subcategories.Add(newSubCategory);
@@ -55,5 +73,20 @@ namespace HandlingDb.Components.Pages
             }
             return newWord;
         }
+        private void OnDropdownChange(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+        {
+                 PravSubCategoryValues.CategoryId = Convert.ToInt32(e.Value);
+            //PravCategory NewpravSubCategoryValues = new PravCategory();
+            //var PravSubCategoryValuesss = NewpravSubCategoryValues.Id;
+
+            //using(TeamDbContext teamdbContext  = new TeamDbContext())
+            //{
+            //    teamdbContext.Subcategories.Add(PravSubCategoryValues);
+            //    teamdbContext.SaveChanges();
+            //}
+            //await GetEmployees();
+        }
+
+
     }
 }

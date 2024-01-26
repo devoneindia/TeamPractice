@@ -1,11 +1,38 @@
-﻿@page "/sub-category"
-<h3>Products</h3>
+﻿@page "/prav-sub-category"
+@inject NavigationManager NavigationManager
+<h3>Sub Categories</h3>
 
+@* @code{
+    private int selectedCategoryId;
 
+    protected override void OnInitialized()
+    {
+        // Extract the category ID from the URL
+        selectedCategoryId = int.Parse(NavigationManager.Uri.Split('/').Last());
+    }
+
+} *@
 <div class="container">
     <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="mb-3">
+                <label class="form-label">SubCategory Name</label>
+                <InputText @bind-Value="PravSubCategoryValues.Name" placeholder="Enter Sub-Category Name" />
+            </div>
+           
+                <div class="mb-3">
+                    <label class="form-label">Select your category:</label>
+                <select @onchange="OnDropdownChange">
+                    <option value="@PravSubCategoryValues.CategoryId">Select a value</option>
+                        @foreach (var pcat in PravCategories)
+                        {
+                            <option value="@pcat.Id">@pcat.Name</option>
+                        }
+                    </select>
+                </div>
+              
+           @*  <InputNumber @bind-Value=@selectedCategoryId /> *@
+        </div>
         <div class="col-4">
             <button class="btn btn-primary" @onclick="AddSubCategory">Add Sub-category</button>
 
